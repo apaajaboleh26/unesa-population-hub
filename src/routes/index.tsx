@@ -18,6 +18,8 @@ import ap from "@/assets/AP.jpeg.asset.json";
 import ppm from "@/assets/PPM.jpeg.asset.json";
 import litbang from "@/assets/LITBANG.jpeg.asset.json";
 import kominfo from "@/assets/KOMINFO.jpg.asset.json";
+import logoUkm from "@/assets/logo-ukm.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
