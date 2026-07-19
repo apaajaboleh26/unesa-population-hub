@@ -878,9 +878,12 @@ function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold text-navy-deep font-display text-lg">
-                U
-              </div>
+              <img
+                src={logoUkm.url}
+                alt="Logo UKM Kependudukan UNESA"
+                className="h-11 w-11 rounded-full bg-white object-contain p-0.5"
+              />
+
               <div>
                 <div className="text-[10px] uppercase tracking-[0.3em] text-white/60">UNESA</div>
                 <div className="text-sm font-medium">UKM Kependudukan</div>
