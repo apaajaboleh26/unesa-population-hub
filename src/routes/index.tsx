@@ -18,6 +18,8 @@ import ap from "@/assets/AP.jpeg.asset.json";
 import ppm from "@/assets/PPM.jpeg.asset.json";
 import litbang from "@/assets/LITBANG.jpeg.asset.json";
 import kominfo from "@/assets/KOMINFO.jpg.asset.json";
+import logoUkm from "@/assets/logo-ukm.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -159,9 +161,12 @@ function Navbar() {
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
         <a href="#beranda" className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-navy-deep font-display text-lg">
-            U
-          </div>
+          <img
+            src={logoUkm.url}
+            alt="Logo UKM Kependudukan UNESA"
+            className={`h-10 w-10 rounded-full object-contain transition ${scrolled ? "bg-white" : "bg-white/95"} p-0.5 ring-1 ring-white/40`}
+          />
+
           <div className={`leading-tight ${scrolled ? "text-foreground" : "text-white"}`}>
             <div className="text-[10px] uppercase tracking-[0.25em] opacity-70">UNESA</div>
             <div className="text-sm font-medium">UKM Kependudukan</div>
@@ -873,9 +878,12 @@ function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold text-navy-deep font-display text-lg">
-                U
-              </div>
+              <img
+                src={logoUkm.url}
+                alt="Logo UKM Kependudukan UNESA"
+                className="h-11 w-11 rounded-full bg-white object-contain p-0.5"
+              />
+
               <div>
                 <div className="text-[10px] uppercase tracking-[0.3em] text-white/60">UNESA</div>
                 <div className="text-sm font-medium">UKM Kependudukan</div>
