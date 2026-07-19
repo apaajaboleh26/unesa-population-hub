@@ -159,9 +159,12 @@ function Navbar() {
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
         <a href="#beranda" className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-navy-deep font-display text-lg">
-            U
-          </div>
+          <img
+            src={logoUkm.url}
+            alt="Logo UKM Kependudukan UNESA"
+            className={`h-10 w-10 rounded-full object-contain transition ${scrolled ? "bg-white" : "bg-white/95"} p-0.5 ring-1 ring-white/40`}
+          />
+
           <div className={`leading-tight ${scrolled ? "text-foreground" : "text-white"}`}>
             <div className="text-[10px] uppercase tracking-[0.25em] opacity-70">UNESA</div>
             <div className="text-sm font-medium">UKM Kependudukan</div>
