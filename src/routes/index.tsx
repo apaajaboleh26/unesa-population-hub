@@ -619,23 +619,41 @@ function ProgramKerja() {
           </h2>
         </Reveal>
 
-        <div className="mt-20 grid gap-px overflow-hidden rounded-sm border border-border bg-border lg:grid-cols-2">
-          {PROKER.map((p, i) => (
-            <Reveal key={i}>
-              <div className="group flex h-full flex-col justify-between gap-6 bg-background p-8 transition hover:bg-navy-deep hover:text-white lg:p-10">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full border border-current px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] opacity-70">
-                      {p.div}
+        <div className="mt-20 space-y-6">
+          {PROKER_GROUPS.map((g) => (
+            <Reveal key={g.code}>
+              <div className="overflow-hidden rounded-sm border border-border bg-background">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border bg-navy-deep px-8 py-6 text-white lg:px-10">
+                  <div className="flex items-center gap-5">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+                      Divisi {g.code}
                     </span>
-                    <span className="font-mono text-[11px] opacity-60">{p.when}</span>
+                    <h3 className="font-display text-2xl leading-tight lg:text-3xl">
+                      {g.div}
+                    </h3>
                   </div>
-                  <h3 className="mt-6 font-display text-3xl leading-tight lg:text-4xl">
-                    {p.name}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed opacity-80">{p.desc}</p>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/60">
+                    {g.items.length} program
+                  </span>
                 </div>
-                <ArrowUpRight className="h-6 w-6 opacity-40 transition group-hover:text-gold group-hover:opacity-100" />
+                <ul className="divide-y divide-border">
+                  {g.items.map((it) => (
+                    <li
+                      key={it.name}
+                      className="group flex flex-wrap items-center justify-between gap-4 px-8 py-5 transition hover:bg-bone lg:px-10"
+                    >
+                      <div className="flex items-center gap-5">
+                        <span className="font-mono text-[10px] text-muted-foreground">→</span>
+                        <span className="font-display text-lg text-navy-deep lg:text-xl">
+                          {it.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+                        {it.when}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           ))}
