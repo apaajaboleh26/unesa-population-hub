@@ -95,15 +95,55 @@ const TIMELINE = [
   { year: "Kini", month: "Kontribusi", title: "Suara Muda Kependudukan", desc: "Aktif dalam diskusi publik, riset, dan pengabdian pada isu bonus demografi dan keluarga." },
 ];
 
-const PROKER = [
-  { div: "Kominfo", name: "Podcast Kependudukan", when: "Bulanan", desc: "Diskusi ringan bersama praktisi dan akademisi seputar isu populasi." },
-  { div: "PPM", name: "Capacity Building", when: "Semester Gasal", desc: "Pelatihan soft skill dan konsolidasi internal seluruh pengurus." },
-  { div: "AP", name: "Seminar Nasional", when: "Tahunan", desc: "Panggung utama membedah isu kependudukan dari perspektif nasional." },
-  { div: "Litbang", name: "Riset Anggota", when: "Berkala", desc: "Pemetaan kompetensi dan minat pengurus untuk basis pengembangan." },
-  { div: "BPH", name: "Rapat Kerja", when: "Awal Periode", desc: "Perencanaan strategis dan penetapan arah organisasi satu periode." },
-  { div: "AP", name: "Pengabdian Masyarakat", when: "Semester Genap", desc: "Turun ke masyarakat: edukasi keluarga berencana dan literasi demografi." },
-  { div: "PPM", name: "Welcome Party", when: "Awal Tahun", desc: "Penyambutan anggota baru dan pengenalan kultur organisasi." },
-  { div: "BPH", name: "The Great Population Event", when: "Puncak Tahun", desc: "Rangkaian puncak: seminar, lomba, dan pameran isu kependudukan." },
+const PROKER_GROUPS = [
+  {
+    code: "01",
+    div: "Badan Pengurus Harian (BPH)",
+    items: [
+      { name: "Open Recruitment & UKM Expo", when: "2026" },
+      { name: "Family Gathering & Buka Bersama", when: "28 Februari 2026" },
+      { name: "Rapat Kerja", when: "28 Februari 2026" },
+      { name: "Ulang Tahun UKM Kependudukan UNESA", when: "12 Maret 2026" },
+      { name: "Pembuatan PDH", when: "18 sampai 25 Maret 2026" },
+      { name: "Musyawarah Anggota", when: "Akhir Periode 2026" },
+    ],
+  },
+  {
+    code: "02",
+    div: "Advokasi dan Pergerakan",
+    items: [
+      { name: "Evaluasi Satu Periode", when: "Akhir Periode 2026" },
+      { name: "Studi Banding", when: "13 Juni 2026" },
+      { name: "The Great Population Event XII", when: "22 Juni sampai 13 Juli 2026" },
+    ],
+  },
+  {
+    code: "03",
+    div: "Potensi dan Pengembangan Mahasiswa",
+    items: [
+      { name: "Capacity Building", when: "25 sampai 26 April 2026" },
+      { name: "Temu GenRe GTS", when: "Juli atau Agustus 2026" },
+    ],
+  },
+  {
+    code: "04",
+    div: "Penelitian dan Pengembangan",
+    items: [
+      { name: "Pengabdian Masyarakat", when: "Juli atau Agustus 2026" },
+      { name: "Wawasan Kependudukan", when: "2026" },
+      { name: "Seminar Nasional Kependudukan", when: "Agustus 2026" },
+      { name: "POKA (Podcast Kependudukan)", when: "Satu Bulan Sekali" },
+    ],
+  },
+  {
+    code: "05",
+    div: "Media Informasi, Teknologi dan Komunikasi",
+    items: [
+      { name: "Publikasi", when: "Rutin" },
+      { name: "Foto Kepengurusan", when: "12 Juni 2026" },
+      { name: "Rekap Dokumentasi Kegiatan", when: "Setiap kegiatan berlangsung" },
+    ],
+  },
 ];
 
 const GALERI = [
@@ -406,7 +446,7 @@ function About() {
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img src={bph.url} alt="Kegiatan UKM Kependudukan" className="h-full w-full object-cover" />
+                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" className="h-full w-full object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-deep to-transparent p-6 text-white">
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Sekretariat</div>
                   <div className="mt-1 text-sm">UKM Center Lantai 3.4 UNESA Ketintang</div>
@@ -579,23 +619,41 @@ function ProgramKerja() {
           </h2>
         </Reveal>
 
-        <div className="mt-20 grid gap-px overflow-hidden rounded-sm border border-border bg-border lg:grid-cols-2">
-          {PROKER.map((p, i) => (
-            <Reveal key={i}>
-              <div className="group flex h-full flex-col justify-between gap-6 bg-background p-8 transition hover:bg-navy-deep hover:text-white lg:p-10">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full border border-current px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] opacity-70">
-                      {p.div}
+        <div className="mt-20 space-y-6">
+          {PROKER_GROUPS.map((g) => (
+            <Reveal key={g.code}>
+              <div className="overflow-hidden rounded-sm border border-border bg-background">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border bg-navy-deep px-8 py-6 text-white lg:px-10">
+                  <div className="flex items-center gap-5">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+                      Divisi {g.code}
                     </span>
-                    <span className="font-mono text-[11px] opacity-60">{p.when}</span>
+                    <h3 className="font-display text-2xl leading-tight lg:text-3xl">
+                      {g.div}
+                    </h3>
                   </div>
-                  <h3 className="mt-6 font-display text-3xl leading-tight lg:text-4xl">
-                    {p.name}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed opacity-80">{p.desc}</p>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/60">
+                    {g.items.length} program
+                  </span>
                 </div>
-                <ArrowUpRight className="h-6 w-6 opacity-40 transition group-hover:text-gold group-hover:opacity-100" />
+                <ul className="divide-y divide-border">
+                  {g.items.map((it) => (
+                    <li
+                      key={it.name}
+                      className="group flex flex-wrap items-center justify-between gap-4 px-8 py-5 transition hover:bg-bone lg:px-10"
+                    >
+                      <div className="flex items-center gap-5">
+                        <span className="font-mono text-[10px] text-muted-foreground">→</span>
+                        <span className="font-display text-lg text-navy-deep lg:text-xl">
+                          {it.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
+                        {it.when}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Reveal>
           ))}
@@ -719,7 +777,7 @@ function MediaPartner() {
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/1YtvKuGwvgSjP0m4DQSnEk8BxorP64X8x/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1BvSjYepQvPqif__lXC54GnJ2QdrLjdJe/view?usp=drive_link"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-center justify-between rounded-sm border border-border bg-background px-6 py-4 text-navy-deep transition hover:border-navy-deep"
@@ -735,10 +793,10 @@ function MediaPartner() {
             <Reveal>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { k: "Ketentuan Umum", v: "Media aktif, memiliki audiens jelas, dan bersedia mempublikasikan konten kegiatan sesuai jadwal yang disepakati." },
-                  { k: "Media Sosial", v: "Wajib memiliki akun aktif di Instagram, TikTok, atau YouTube dengan konten publikasi berkala." },
-                  { k: "Prosedur", v: "Ajukan proposal, verifikasi oleh Kominfo, penandatanganan MoU digital, lalu eksekusi publikasi." },
-                  { k: "Minimal Followers", v: "Instagram 1000+, TikTok 500+, YouTube 100+ subscribers untuk memastikan jangkauan publikasi." },
+                  { k: "Ketentuan Umum", v: "Calon Media Partner wajib mempublikasikan konten yang tidak mengandung unsur ujaran kebencian, pelecehan, provokasi, diskriminasi, maupun informasi yang tidak benar. Setiap materi publikasi harus mencantumkan logo resmi UKM Kependudukan UNESA, dan seluruh konten yang dipublikasikan menjadi tanggung jawab Media Partner. Bukti persyaratan dikirimkan kepada narahubung sebelum proses publikasi." },
+                  { k: "Persyaratan Media Sosial", v: "Calon Media Partner wajib mengikuti akun resmi UKM Kependudukan UNESA dengan ketentuan minimal 15 akun Instagram, 5 akun TikTok, dan 5 akun YouTube. Seluruh akun yang didaftarkan harus merupakan akun aktif dan akan diverifikasi oleh panitia sebelum kerja sama disetujui." },
+                  { k: "Prosedur Pengajuan", v: "Daftar username akun Instagram, TikTok, dan YouTube dikumpulkan dalam format PDF atau DOCX, kemudian dikirimkan kepada narahubung paling lambat 3 hari sebelum jadwal publikasi. Setelah proses verifikasi selesai dan seluruh persyaratan dinyatakan lengkap, materi publikasi akan diproses sesuai ketentuan UKM Kependudukan UNESA." },
+                  { k: "Informasi Publikasi", v: "Setelah seluruh persyaratan terpenuhi, poster atau materi publikasi akan diterbitkan maksimal 2 hari kerja. Pastikan seluruh informasi pada materi publikasi telah benar sebelum konfirmasi akhir diberikan, karena revisi setelah konfirmasi tidak dapat dilayani. Untuk informasi lebih lanjut, hubungi Kak Bagas (085784752845) atau melalui akun media sosial resmi UKM Kependudukan UNESA." },
                 ].map((c) => (
                   <div key={c.k} className="border-l-2 border-gold bg-bone p-6">
                     <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-navy">
