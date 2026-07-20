@@ -777,7 +777,7 @@ function MediaPartner() {
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
                 <a
-                  href="https://drive.google.com/file/d/1YtvKuGwvgSjP0m4DQSnEk8BxorP64X8x/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1BvSjYepQvPqif__lXC54GnJ2QdrLjdJe/view?usp=drive_link"
                   target="_blank"
                   rel="noreferrer"
                   className="group flex items-center justify-between rounded-sm border border-border bg-background px-6 py-4 text-navy-deep transition hover:border-navy-deep"
