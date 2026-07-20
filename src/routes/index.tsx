@@ -446,7 +446,7 @@ function About() {
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img src={bph.url} alt="Kegiatan UKM Kependudukan" className="h-full w-full object-cover" />
+                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" className="h-full w-full object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-deep to-transparent p-6 text-white">
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Sekretariat</div>
                   <div className="mt-1 text-sm">UKM Center Lantai 3.4 UNESA Ketintang</div>
