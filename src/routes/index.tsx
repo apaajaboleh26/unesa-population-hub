@@ -793,10 +793,10 @@ function MediaPartner() {
             <Reveal>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { k: "Ketentuan Umum", v: "Media aktif, memiliki audiens jelas, dan bersedia mempublikasikan konten kegiatan sesuai jadwal yang disepakati." },
-                  { k: "Media Sosial", v: "Wajib memiliki akun aktif di Instagram, TikTok, atau YouTube dengan konten publikasi berkala." },
-                  { k: "Prosedur", v: "Ajukan proposal, verifikasi oleh Kominfo, penandatanganan MoU digital, lalu eksekusi publikasi." },
-                  { k: "Minimal Followers", v: "Instagram 1000+, TikTok 500+, YouTube 100+ subscribers untuk memastikan jangkauan publikasi." },
+                  { k: "Ketentuan Umum", v: "Calon Media Partner wajib mempublikasikan konten yang tidak mengandung unsur ujaran kebencian, pelecehan, provokasi, diskriminasi, maupun informasi yang tidak benar. Setiap materi publikasi harus mencantumkan logo resmi UKM Kependudukan UNESA, dan seluruh konten yang dipublikasikan menjadi tanggung jawab Media Partner. Bukti persyaratan dikirimkan kepada narahubung sebelum proses publikasi." },
+                  { k: "Persyaratan Media Sosial", v: "Calon Media Partner wajib mengikuti akun resmi UKM Kependudukan UNESA dengan ketentuan minimal 15 akun Instagram, 5 akun TikTok, dan 5 akun YouTube. Seluruh akun yang didaftarkan harus merupakan akun aktif dan akan diverifikasi oleh panitia sebelum kerja sama disetujui." },
+                  { k: "Prosedur Pengajuan", v: "Daftar username akun Instagram, TikTok, dan YouTube dikumpulkan dalam format PDF atau DOCX, kemudian dikirimkan kepada narahubung paling lambat 3 hari sebelum jadwal publikasi. Setelah proses verifikasi selesai dan seluruh persyaratan dinyatakan lengkap, materi publikasi akan diproses sesuai ketentuan UKM Kependudukan UNESA." },
+                  { k: "Informasi Publikasi", v: "Setelah seluruh persyaratan terpenuhi, poster atau materi publikasi akan diterbitkan maksimal 2 hari kerja. Pastikan seluruh informasi pada materi publikasi telah benar sebelum konfirmasi akhir diberikan, karena revisi setelah konfirmasi tidak dapat dilayani. Untuk informasi lebih lanjut, hubungi Kak Bagas (085784752845) atau melalui akun media sosial resmi UKM Kependudukan UNESA." },
                 ].map((c) => (
                   <div key={c.k} className="border-l-2 border-gold bg-bone p-6">
                     <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-navy">
