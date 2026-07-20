@@ -95,15 +95,55 @@ const TIMELINE = [
   { year: "Kini", month: "Kontribusi", title: "Suara Muda Kependudukan", desc: "Aktif dalam diskusi publik, riset, dan pengabdian pada isu bonus demografi dan keluarga." },
 ];
 
-const PROKER = [
-  { div: "Kominfo", name: "Podcast Kependudukan", when: "Bulanan", desc: "Diskusi ringan bersama praktisi dan akademisi seputar isu populasi." },
-  { div: "PPM", name: "Capacity Building", when: "Semester Gasal", desc: "Pelatihan soft skill dan konsolidasi internal seluruh pengurus." },
-  { div: "AP", name: "Seminar Nasional", when: "Tahunan", desc: "Panggung utama membedah isu kependudukan dari perspektif nasional." },
-  { div: "Litbang", name: "Riset Anggota", when: "Berkala", desc: "Pemetaan kompetensi dan minat pengurus untuk basis pengembangan." },
-  { div: "BPH", name: "Rapat Kerja", when: "Awal Periode", desc: "Perencanaan strategis dan penetapan arah organisasi satu periode." },
-  { div: "AP", name: "Pengabdian Masyarakat", when: "Semester Genap", desc: "Turun ke masyarakat: edukasi keluarga berencana dan literasi demografi." },
-  { div: "PPM", name: "Welcome Party", when: "Awal Tahun", desc: "Penyambutan anggota baru dan pengenalan kultur organisasi." },
-  { div: "BPH", name: "The Great Population Event", when: "Puncak Tahun", desc: "Rangkaian puncak: seminar, lomba, dan pameran isu kependudukan." },
+const PROKER_GROUPS = [
+  {
+    code: "01",
+    div: "Badan Pengurus Harian (BPH)",
+    items: [
+      { name: "Open Recruitment & UKM Expo", when: "2026" },
+      { name: "Family Gathering & Buka Bersama", when: "28 Februari 2026" },
+      { name: "Rapat Kerja", when: "28 Februari 2026" },
+      { name: "Ulang Tahun UKM Kependudukan UNESA", when: "12 Maret 2026" },
+      { name: "Pembuatan PDH", when: "18 sampai 25 Maret 2026" },
+      { name: "Musyawarah Anggota", when: "Akhir Periode 2026" },
+    ],
+  },
+  {
+    code: "02",
+    div: "Advokasi dan Pergerakan",
+    items: [
+      { name: "Evaluasi Satu Periode", when: "Akhir Periode 2026" },
+      { name: "Studi Banding", when: "13 Juni 2026" },
+      { name: "The Great Population Event XII", when: "22 Juni sampai 13 Juli 2026" },
+    ],
+  },
+  {
+    code: "03",
+    div: "Potensi dan Pengembangan Mahasiswa",
+    items: [
+      { name: "Capacity Building", when: "25 sampai 26 April 2026" },
+      { name: "Temu GenRe GTS", when: "Juli atau Agustus 2026" },
+    ],
+  },
+  {
+    code: "04",
+    div: "Penelitian dan Pengembangan",
+    items: [
+      { name: "Pengabdian Masyarakat", when: "Juli atau Agustus 2026" },
+      { name: "Wawasan Kependudukan", when: "2026" },
+      { name: "Seminar Nasional Kependudukan", when: "Agustus 2026" },
+      { name: "POKA (Podcast Kependudukan)", when: "Satu Bulan Sekali" },
+    ],
+  },
+  {
+    code: "05",
+    div: "Media Informasi, Teknologi dan Komunikasi",
+    items: [
+      { name: "Publikasi", when: "Rutin" },
+      { name: "Foto Kepengurusan", when: "12 Juni 2026" },
+      { name: "Rekap Dokumentasi Kegiatan", when: "Setiap kegiatan berlangsung" },
+    ],
+  },
 ];
 
 const GALERI = [
