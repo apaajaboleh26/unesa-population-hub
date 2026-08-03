@@ -518,7 +518,7 @@ function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,oklch(0.14_0.05_260/0.55)_100%)]" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-[1400px] flex-col items-center justify-center px-6 pb-24 pt-32 text-center lg:px-10 lg:pt-40">
-        <div className="mb-8 inline-flex items-center gap-3 text-white/70">
+        <div className="mb-8 inline-flex items-center gap-3 text-white/85">
           <span className="h-px w-10 bg-gold" />
           <span className="text-[11px] uppercase tracking-[0.35em]">Sejak 2014 di Kampus Ketintang</span>
           <span className="h-px w-10 bg-gold" />
@@ -529,7 +529,7 @@ function Hero() {
           <span className="italic text-gold">kependudukan.</span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-2xl text-balance text-base leading-relaxed text-white/85 lg:text-lg">
+        <p className="mx-auto mt-8 max-w-2xl text-balance text-base leading-relaxed text-white/90 lg:text-lg">
           UKM Kependudukan Universitas Negeri Surabaya adalah wadah mahasiswa untuk mengkaji, mengadvokasi, dan mengedukasi persoalan demografi Indonesia lewat riset, aksi, dan kolaborasi lintas disiplin.
         </p>
 
@@ -556,7 +556,7 @@ function Hero() {
           <Stat n={20} suffix="+" label="Program kerja tahunan" />
         </div>
 
-        <div className="pointer-events-none absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-white/60 lg:flex">
+        <div className="pointer-events-none absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-white/85 lg:flex">
           <ChevronDown className="h-4 w-4 animate-bounce" />
           <span className="text-[10px] uppercase tracking-[0.3em]">Gulir untuk menjelajah</span>
         </div>
@@ -600,7 +600,7 @@ function Stat({ n, suffix = "", label }: { n: number; suffix?: string; label: st
         {val}
         <span className="text-gold">{suffix}</span>
       </div>
-      <div className="mt-3 text-xs uppercase tracking-[0.25em] text-white/60">{label}</div>
+      <div className="mt-3 text-xs uppercase tracking-[0.25em] text-white/85">{label}</div>
     </div>
   );
 }
@@ -735,7 +735,7 @@ function VisiMisi() {
       <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 02">
-          <span className="text-white/60">Visi & Misi</span>
+          <span className="text-white/85">Visi & Misi</span>
         </SectionLabel>
         <Reveal>
           <h2 className="font-display text-4xl leading-[1.1] tracking-tight lg:text-[5.5rem]">
@@ -1410,7 +1410,7 @@ function Artikel() {
     <section id="artikel" className="bg-navy-deep py-24 text-white lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 06">
-          <span className="text-white/60">Artikel</span>
+          <span className="text-white/85">Artikel</span>
         </SectionLabel>
         <Reveal>
           <h2 className="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight lg:text-7xl">
@@ -1421,14 +1421,14 @@ function Artikel() {
         <Reveal>
           <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <label className="relative flex w-full items-center lg:max-w-md">
-              <Search className="pointer-events-none absolute left-4 h-4 w-4 text-white/50" aria-hidden="true" />
+              <Search className="pointer-events-none absolute left-4 h-4 w-4 text-white/80" aria-hidden="true" />
               <span className="sr-only">Cari artikel</span>
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cari judul, kategori, atau penulis"
-                className="min-h-11 w-full rounded-full border border-white/20 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 backdrop-blur-md focus:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="min-h-11 w-full rounded-full border border-white/20 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/80 backdrop-blur-md focus:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               />
             </label>
             <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter kategori artikel">
@@ -1449,7 +1449,7 @@ function Artikel() {
         </Reveal>
 
         {filtered.length === 0 && (
-          <div className="mt-20 rounded-sm border border-dashed border-white/20 p-12 text-center text-sm text-white/60">
+          <div className="mt-20 rounded-sm border border-dashed border-white/20 p-12 text-center text-sm text-white/85">
             Tidak ada artikel yang cocok dengan pencarian Anda.
           </div>
         )}
@@ -1472,7 +1472,7 @@ function Artikel() {
                 </div>
               </div>
               <div className="lg:col-span-4 lg:pt-4">
-                <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/60">
+                <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/85">
                   {featured.date} · {featured.readTime}
                 </div>
                 <h3 className="mt-4 font-display text-4xl leading-tight lg:text-5xl">
@@ -1530,7 +1530,7 @@ function ArtikelCard({ a, large = false, onOpen }: { a: Artikel; large?: boolean
             {a.cat}
           </div>
         </div>
-        <div className={`mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-white/60`}>
+        <div className={`mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-white/85`}>
           {a.date} · {a.readTime}
         </div>
         <h3 className={`mt-3 font-display leading-tight text-white ${large ? "text-3xl lg:text-4xl" : "text-2xl lg:text-3xl"}`}>
@@ -1538,7 +1538,7 @@ function ArtikelCard({ a, large = false, onOpen }: { a: Artikel; large?: boolean
             {a.title}
           </span>
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/70">{a.excerpt}</p>
+        <p className="mt-3 text-sm leading-relaxed text-white/85">{a.excerpt}</p>
         <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
           Baca selengkapnya
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -1675,7 +1675,7 @@ function MediaPartner() {
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">Narahubung</div>
                 <div className="mt-1 font-display text-3xl">Kak Bagas</div>
-                <div className="text-sm text-white/70">0857-8475-2845 · Informasi lebih lanjut media partner</div>
+                <div className="text-sm text-white/85">0857-8475-2845 · Informasi lebih lanjut media partner</div>
               </div>
             </div>
             <a
@@ -1775,11 +1775,11 @@ function Footer() {
             <div className="flex items-center gap-3">
               <img src={logoUkm.url} alt="Logo UKM Kependudukan UNESA" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
               <div>
-                <div className="text-[10px] uppercase tracking-[0.3em] text-white/60">UNESA</div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-white/85">UNESA</div>
                 <div className="text-sm font-medium">UKM Kependudukan</div>
               </div>
             </div>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-white/70">
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-white/85">
               Wadah mahasiswa Universitas Negeri Surabaya untuk mengkaji, mengadvokasi, dan mengedukasi isu kependudukan Indonesia sejak 2014.
             </p>
           </div>
@@ -1803,20 +1803,20 @@ function Footer() {
               Surabaya, Jawa Timur
             </p>
             <div className="mt-6 flex items-center gap-4">
-              <a href="https://instagram.com/ukmkependudukanunesa" aria-label="Instagram" className="text-white/70 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+              <a href="https://instagram.com/ukmkependudukanunesa" aria-label="Instagram" className="text-white/85 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://tiktok.com/@ukmkependudukanunesaa" aria-label="TikTok" className="text-white/70 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+              <a href="https://tiktok.com/@ukmkependudukanunesaa" aria-label="TikTok" className="text-white/85 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
                 <Music2 className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="YouTube" className="text-white/70 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+              <a href="#" aria-label="YouTube" className="text-white/85 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/50 sm:flex-row sm:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/80 sm:flex-row sm:items-center">
           <div>© {new Date().getFullYear()} UKM Kependudukan UNESA. Seluruh hak cipta dilindungi.</div>
           <div className="font-mono">Dibuat dengan hati di Surabaya.</div>
         </div>
