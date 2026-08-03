@@ -731,7 +731,7 @@ function VisiMisi() {
     "Menumbuhkan kader yang kritis, kolaboratif, dan berkontribusi.",
   ];
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-28 text-white lg:py-40">
+    <section className="relative overflow-hidden bg-navy-deep py-24 text-white lg:py-32">
       <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 02">
@@ -1407,7 +1407,7 @@ function Artikel() {
   const tail = rest.slice(2);
 
   return (
-    <section id="artikel" className="bg-navy-deep py-28 text-white lg:py-40">
+    <section id="artikel" className="bg-navy-deep py-24 text-white lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 06">
           <span className="text-white/60">Artikel</span>
