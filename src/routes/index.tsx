@@ -744,7 +744,7 @@ function About() {
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" className="h-full w-full object-cover" />
+                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-deep to-transparent p-6 text-white">
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Sekretariat</div>
                   <div className="mt-1 text-sm">UKM Center Lantai 3.4 UNESA Ketintang</div>
@@ -928,7 +928,7 @@ function DivisiModal({ divisi, onClose }: { divisi: Divisi; onClose: () => void 
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
-          <img src={divisi.image} alt={`Banner ${divisi.name}`} className="h-full w-full object-cover" />
+          <img src={divisi.image} alt={`Banner ${divisi.name}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
           <button
             onClick={onClose}
@@ -1428,7 +1428,7 @@ function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void })
           <X className="h-5 w-5" />
         </button>
         <div className="overflow-y-auto">
-          <img src={item.src} alt={item.cat} className="max-h-[52vh] w-full bg-muted object-contain" />
+          <img src={item.src} alt={item.cat} decoding="async" className="max-h-[52vh] w-full bg-muted object-contain" />
           <div className="flex flex-wrap items-end justify-between gap-4 p-6">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-navy">Dokumentasi · {item.date}</div>
@@ -1645,7 +1645,7 @@ function ArtikelModal({ artikel, onClose }: { artikel: Artikel; onClose: () => v
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
-          <img src={artikel.image} alt={artikel.title} className="h-full w-full object-cover" />
+          <img src={artikel.image} alt={artikel.title} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 to-transparent" />
           <button
             onClick={onClose}
@@ -1845,7 +1845,7 @@ function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <img src={logoUkm.url} alt="Logo UKM Kependudukan UNESA" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
+              <img src={logoUkm.url} alt="Logo UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
               <div>
                 <div className="text-[10px] uppercase tracking-[0.3em] text-white/85">UNESA</div>
                 <div className="text-sm font-medium">UKM Kependudukan</div>
