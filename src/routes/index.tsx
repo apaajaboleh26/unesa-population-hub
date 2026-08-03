@@ -649,11 +649,13 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ${shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"} ${className}`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
+      className={`transition-[opacity,transform] duration-[380ms] will-change-transform ${shown ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${className}`}
     >
       {children}
     </div>
   );
+
 }
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
