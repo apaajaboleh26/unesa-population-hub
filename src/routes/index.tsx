@@ -783,31 +783,36 @@ function Divisi() {
           </div>
         </div>
 
-        <div className="mt-20 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {DIVISI.map((d) => (
-            <Reveal key={d.code}>
+        <div className="mt-16 grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+          {DIVISI.map((d, i) => (
+            <Reveal
+              key={d.code}
+              className={`h-full ${i < 3 ? "lg:col-span-2" : "lg:col-span-3"} ${i === DIVISI.length - 1 ? "md:col-span-2 lg:col-span-3" : ""}`}
+            >
               <button
                 type="button"
                 onClick={() => setActive(d)}
-                className="group relative block h-full w-full overflow-hidden rounded-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="group relative block h-full w-full overflow-hidden rounded-xl text-left shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
                 aria-label={`Buka profil divisi ${d.name}`}
               >
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+                <div className="relative h-full min-h-[380px] w-full overflow-hidden bg-muted">
                   <img
                     src={d.image}
                     alt={`Divisi ${d.name}`}
-                    className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
-                  <div className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/50 to-navy-deep/10" />
+                  <div className="absolute left-5 top-5 rounded-full bg-white px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
                     Divisi {d.code}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                     <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">{d.short}</div>
                     <h3 className="mt-2 font-display text-2xl leading-tight lg:text-3xl">{d.name}</h3>
-                    <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-white/90">
+                    <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-white">
                       Lihat profil
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
                   </div>
                 </div>
@@ -815,6 +820,7 @@ function Divisi() {
             </Reveal>
           ))}
         </div>
+
       </div>
 
       {active && <DivisiModal divisi={active} onClose={() => setActive(null)} />}
