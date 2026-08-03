@@ -666,7 +666,7 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
 
 function About() {
   return (
-    <section id="tentang" className="relative bg-bone py-28 lg:py-40">
+    <section id="tentang" className="relative bg-bone py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           <Reveal className="lg:col-span-6">
@@ -763,7 +763,7 @@ function Divisi() {
   const [active, setActive] = useState<Divisi | null>(null);
 
   return (
-    <section id="divisi" className="bg-background py-28 lg:py-40">
+    <section id="divisi" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
@@ -848,11 +848,11 @@ function DivisiModal({ divisi, onClose }: { divisi: Divisi; onClose: () => void 
       role="dialog"
       aria-modal="true"
       aria-labelledby="divisi-modal-title"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/85 p-4 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-sm bg-background shadow-2xl animate-scale-in"
+        className="relative max-h-[80vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-background shadow-2xl animate-modal-panel sm:w-[80vw]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
@@ -1064,7 +1064,7 @@ function ProgramKerja() {
   };
 
   return (
-    <section id="program" className="bg-bone py-28 lg:py-40">
+    <section id="program" className="bg-bone py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 04">Program Kerja</SectionLabel>
         <div className="grid items-end gap-8 lg:grid-cols-12">
@@ -1204,11 +1204,11 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/80 p-4 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-sm bg-background p-8 shadow-2xl animate-scale-in lg:p-12"
+        className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-background p-8 shadow-2xl animate-modal-panel sm:w-[70vw] lg:p-12"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -1565,11 +1565,11 @@ function ArtikelModal({ artikel, onClose }: { artikel: Artikel; onClose: () => v
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/85 p-4 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-sm bg-background text-navy-deep shadow-2xl animate-scale-in"
+        className="relative max-h-[80vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-background text-navy-deep shadow-2xl animate-modal-panel sm:w-[75vw]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
@@ -1611,7 +1611,7 @@ function MediaPartner() {
   ];
 
   return (
-    <section id="media-partner" className="bg-background py-28 lg:py-40">
+    <section id="media-partner" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
@@ -1706,7 +1706,7 @@ function Kontak() {
   ];
 
   return (
-    <section id="kontak" className="bg-bone py-28 lg:py-40">
+    <section id="kontak" className="bg-bone py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 08">Kontak</SectionLabel>
         <Reveal>
