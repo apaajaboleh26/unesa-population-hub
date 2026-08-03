@@ -1257,99 +1257,13 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
   );
 }
 
-// ==================== Galeri (horizontal snap slider) ====================
+// ==================== Galeri (static grid + modal) ====================
 
 function Galeri() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const [lightbox, setLightbox] = useState<number | null>(null);
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const children = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
-      const center = el.scrollLeft + el.clientWidth / 2;
-      let closest = 0;
-      let closestDist = Infinity;
-      children.forEach((c, i) => {
-        const mid = c.offsetLeft + c.offsetWidth / 2;
-        const d = Math.abs(mid - center);
-        if (d < closestDist) {
-          closestDist = d;
-          closest = i;
-        }
-      });
-      setActiveIdx(closest);
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // autoplay
-  useEffect(() => {
-    if (!playing || lightbox !== null) return;
-    const id = setInterval(() => {
-      const el = scrollerRef.current;
-      if (!el) return;
-      const children = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
-      const next = (activeIdx + 1) % children.length;
-      children[next]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    }, 4200);
-    return () => clearInterval(id);
-  }, [playing, activeIdx, lightbox]);
-
-  // drag to scroll
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    const down = (e: MouseEvent) => {
-      isDown = true;
-      el.classList.add("cursor-grabbing");
-      startX = e.pageX - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-      setPlaying(false);
-    };
-    const up = () => {
-      isDown = false;
-      el.classList.remove("cursor-grabbing");
-    };
-    const move = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - el.offsetLeft;
-      el.scrollLeft = scrollLeft - (x - startX);
-    };
-    el.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    el.addEventListener("mouseleave", up);
-    el.addEventListener("mousemove", move);
-    return () => {
-      el.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
-      el.removeEventListener("mouseleave", up);
-      el.removeEventListener("mousemove", move);
-    };
-  }, []);
-
-  const scrollTo = (i: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const children = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
-    children[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  };
-  const next = () => scrollTo(Math.min(activeIdx + 1, GALERI.length - 1));
-  const prev = () => scrollTo(Math.max(activeIdx - 1, 0));
-
-  const active = GALERI[activeIdx];
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="galeri" className="overflow-hidden bg-background py-28 lg:py-40">
+    <section id="galeri" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
@@ -1362,126 +1276,53 @@ function Galeri() {
           </div>
           <div className="lg:col-span-4">
             <Reveal>
-              <p className="text-muted-foreground">
-                Geser dengan scroll horizontal, drag mouse, atau sentuhan pada mobile. Klik foto untuk membuka tampilan lightbox penuh layar dan unduh dokumentasi.
+              <p className="text-navy/80">
+                Telusuri dokumentasi kegiatan dengan menggulir halaman. Klik salah satu foto untuk membukanya lebih besar beserta keterangan kegiatan.
               </p>
             </Reveal>
           </div>
         </div>
-      </div>
 
-      <div
-        ref={scrollerRef}
-        className="mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-[10vw] py-6 cursor-grab lg:gap-8 lg:py-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        onMouseEnter={() => setPlaying(false)}
-        onMouseLeave={() => setPlaying(true)}
-        onTouchStart={() => setPlaying(false)}
-        aria-label="Galeri foto UKM Kependudukan UNESA"
-      >
-        {GALERI.map((g, i) => {
-          const isActive = i === activeIdx;
-          return (
-            <div
-              key={g.filename}
-              data-slide
-              className={`relative shrink-0 snap-center overflow-hidden rounded-sm shadow-2xl transition-all duration-700 ease-out ${
-                isActive
-                  ? "aspect-[4/3] w-[85vw] scale-100 opacity-100 blur-0 lg:w-[62vw]"
-                  : "aspect-[4/3] w-[70vw] scale-[0.86] opacity-70 blur-[2px] lg:w-[46vw]"
-              }`}
-            >
-              <img
-                src={g.src}
-                alt={g.cat}
-                draggable={false}
-                className="pointer-events-none h-full w-full object-cover"
-              />
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {GALERI.map((g, i) => (
+            <Reveal key={g.filename} className="h-full">
               <button
                 type="button"
-                onClick={() => setLightbox(i)}
-                className="absolute inset-0 flex items-end justify-between p-6 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:p-10"
-                aria-label={`Buka lightbox foto ${g.cat}`}
+                onClick={() => setOpenIdx(i)}
+                aria-label={`Buka foto ${g.cat}`}
+                className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-border bg-card text-left shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
               >
-                <div className={`transition duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold drop-shadow">Dokumentasi · {g.date}</div>
-                  <div className="mt-2 font-display text-2xl leading-tight drop-shadow lg:text-4xl">{g.cat}</div>
-                  <p className="mt-2 max-w-lg text-sm text-white/85 drop-shadow">{g.desc}</p>
+                <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
+                  <img
+                    src={g.src}
+                    alt={g.cat}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
+                  />
                 </div>
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/90 text-navy-deep">
-                  <Maximize2 className="h-4 w-4" />
-                </span>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-navy">{g.date}</div>
+                  <h3 className="mt-2 font-display text-xl leading-snug text-navy-deep">{g.cat}</h3>
+                  <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-navy/80">{g.desc}</p>
+                </div>
               </button>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-deep/80 to-transparent" />
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mx-auto mt-6 flex max-w-[1400px] items-center justify-between gap-4 px-6 lg:px-10">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={prev}
-            aria-label="Foto sebelumnya"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border bg-background text-navy-deep transition hover:border-navy-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            onClick={next}
-            aria-label="Foto berikutnya"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border bg-background text-navy-deep transition hover:border-navy-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-          <button
-            onClick={() => setPlaying((v) => !v)}
-            aria-label={playing ? "Jeda autoplay" : "Mainkan autoplay"}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-background px-4 text-[12px] font-semibold text-navy-deep transition hover:border-navy-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-            {playing ? "Jeda" : "Mainkan"}
-          </button>
-          <button
-            onClick={() => downloadImage(active.src, active.filename)}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-4 text-[12px] font-semibold text-navy-deep transition hover:bg-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-navy-deep"
-          >
-            <Download className="h-3.5 w-3.5" />
-            Unduh foto aktif
-          </button>
-        </div>
-        <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-          {String(activeIdx + 1).padStart(2, "0")} / {String(GALERI.length).padStart(2, "0")}
+            </Reveal>
+          ))}
         </div>
       </div>
 
-      {lightbox !== null && (
-        <Lightbox
-          items={GALERI}
-          index={lightbox}
-          onClose={() => setLightbox(null)}
-          onChange={setLightbox}
-        />
+      {openIdx !== null && (
+        <FotoModal item={GALERI[openIdx]} onClose={() => setOpenIdx(null)} />
       )}
     </section>
   );
 }
 
-function Lightbox({
-  items,
-  index,
-  onClose,
-  onChange,
-}: {
-  items: GaleriItem[];
-  index: number;
-  onClose: () => void;
-  onChange: (i: number) => void;
-}) {
+function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onChange((index + 1) % items.length);
-      if (e.key === "ArrowLeft") onChange((index - 1 + items.length) % items.length);
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -1489,63 +1330,49 @@ function Lightbox({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [index, items.length, onChange, onClose]);
+  }, [onClose]);
 
-  const g = items[index];
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Foto ${g.cat}`}
-      className="fixed inset-0 z-[110] flex flex-col bg-navy-deep/95 backdrop-blur-md animate-fade-up"
+      aria-label={`Foto ${item.cat}`}
       onClick={onClose}
+      className="fixed inset-0 z-[110] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
     >
-      <button
-        onClick={onClose}
-        aria-label="Tutup lightbox"
-        className="absolute right-4 top-4 z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/90 text-navy-deep transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative flex max-h-[80vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-card shadow-2xl animate-modal-panel sm:w-[70vw]"
       >
-        <X className="h-5 w-5" />
-      </button>
-      <div className="flex flex-1 items-center justify-center p-6" onClick={(e) => e.stopPropagation()}>
         <button
-          onClick={() => onChange((index - 1 + items.length) % items.length)}
-          aria-label="Foto sebelumnya"
-          className="mr-4 hidden min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:inline-flex"
+          onClick={onClose}
+          aria-label="Tutup"
+          className="absolute right-3 top-3 z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-card/90 text-navy-deep shadow transition-colors duration-300 ease-in-out hover:bg-bone focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <X className="h-5 w-5" />
         </button>
-        <img
-          key={g.src}
-          src={g.src}
-          alt={g.cat}
-          className="max-h-[80vh] max-w-[90vw] rounded-sm object-contain animate-scale-in"
-        />
-        <button
-          onClick={() => onChange((index + 1) % items.length)}
-          aria-label="Foto berikutnya"
-          className="ml-4 hidden min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:inline-flex"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
-      <div className="mx-auto flex w-full max-w-4xl flex-wrap items-end justify-between gap-4 px-6 pb-8 text-white" onClick={(e) => e.stopPropagation()}>
-        <div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Dokumentasi · {g.date}</div>
-          <div className="mt-2 font-display text-3xl">{g.cat}</div>
-          <p className="mt-2 max-w-2xl text-sm text-white/80">{g.desc}</p>
+        <div className="overflow-y-auto">
+          <img src={item.src} alt={item.cat} className="max-h-[52vh] w-full bg-muted object-contain" />
+          <div className="flex flex-wrap items-end justify-between gap-4 p-6">
+            <div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-navy">Dokumentasi · {item.date}</div>
+              <h3 className="mt-2 font-display text-2xl text-navy-deep">{item.cat}</h3>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-navy/80">{item.desc}</p>
+            </div>
+            <button
+              onClick={() => downloadImage(item.src, item.filename)}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-navy-deep px-5 py-2.5 text-[13px] font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            >
+              <Download className="h-4 w-4" />
+              Unduh Foto
+            </button>
+          </div>
         </div>
-        <button
-          onClick={() => downloadImage(g.src, g.filename)}
-          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[13px] font-semibold text-navy-deep transition hover:bg-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-        >
-          <Download className="h-4 w-4" />
-          Unduh Foto
-        </button>
       </div>
     </div>
   );
 }
+
 
 // ==================== Artikel (editorial) ====================
 
