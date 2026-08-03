@@ -37,17 +37,89 @@ import fungsionaris from "@/assets/fungsionaris.jpg.asset.json";
 import kominfo2 from "@/assets/kominfo2.jpg.asset.json";
 import fotobersama2 from "@/assets/fotobersama-2.jpg.asset.json";
 
+const SITE = "https://id-preview--65b75f9d-e30c-4e65-bc38-95e32e144ce3.lovable.app";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { title: "UKM Kependudukan UNESA | Suara Muda Isu Kependudukan" },
       {
-        property: "og:image",
-        content: `https://id-preview--65b75f9d-e30c-4e65-bc38-95e32e144ce3.lovable.app${fotoBersama.url}`,
+        name: "description",
+        content:
+          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, artikel, dan informasi media partner.",
+      },
+      { property: "og:title", content: "UKM Kependudukan UNESA" },
+      {
+        property: "og:description",
+        content: "Wadah mahasiswa UNESA untuk mengkaji, mengadvokasi, dan mengedukasi isu demografi Indonesia.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: `${SITE}${fotoBersama.url}` },
+      { name: "twitter:image", content: `${SITE}${fotoBersama.url}` },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${SITE}/#organization`,
+              name: "UKM Kependudukan Universitas Negeri Surabaya",
+              alternateName: "UKM Kependudukan UNESA",
+              url: SITE,
+              logo: `${SITE}${logoUkm.url}`,
+              image: `${SITE}${fotoBersama.url}`,
+              foundingDate: "2014-03-08",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "UKM Center Lantai 3.4, Kampus UNESA Ketintang",
+                addressLocality: "Surabaya",
+                addressRegion: "Jawa Timur",
+                addressCountry: "ID",
+              },
+              sameAs: [
+                "https://instagram.com/ukmkependudukanunesa",
+                "https://tiktok.com/@ukmkependudukanunesaa",
+              ],
+            },
+            ...ARTIKEL.map((a) => ({
+              "@type": "Article",
+              headline: a.title,
+              description: a.excerpt,
+              image: `${SITE}${a.image}`,
+              datePublished: a.date,
+              author: { "@type": "Organization", name: a.author },
+              publisher: { "@id": `${SITE}/#organization` },
+              mainEntityOfPage: `${SITE}/#artikel`,
+            })),
+            ...PROKER.map((p) => ({
+              "@type": "Event",
+              name: p.name,
+              description: p.desc,
+              startDate: `${p.start.slice(0, 4)}-${p.start.slice(4, 6)}-${p.start.slice(6, 8)}`,
+              endDate: `${(p.end ?? p.start).slice(0, 4)}-${(p.end ?? p.start).slice(4, 6)}-${(p.end ?? p.start).slice(6, 8)}`,
+              eventStatus: "https://schema.org/EventScheduled",
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+              location: {
+                "@type": "Place",
+                name: p.location ?? "Universitas Negeri Surabaya",
+                address: { "@type": "PostalAddress", addressLocality: "Surabaya", addressCountry: "ID" },
+              },
+              organizer: { "@id": `${SITE}/#organization` },
+            })),
+          ],
+        }),
       },
     ],
   }),
   component: Home,
 });
+
 
 const NAV = [
   { label: "Beranda", href: "#beranda" },
