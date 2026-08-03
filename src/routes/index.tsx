@@ -8,8 +8,6 @@ import {
   Phone,
   Music2,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Menu,
   X,
   Calendar,
@@ -20,10 +18,8 @@ import {
   Users,
   Target,
   ListChecks,
-  Play,
-  Pause,
-  Maximize2,
 } from "lucide-react";
+
 
 import fotoBersama from "@/assets/FOTOBERSAMA.jpg.asset.json";
 import bph from "@/assets/BPH.jpg.asset.json";
