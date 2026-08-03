@@ -8,8 +8,6 @@ import {
   Phone,
   Music2,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Menu,
   X,
   Calendar,
@@ -20,10 +18,8 @@ import {
   Users,
   Target,
   ListChecks,
-  Play,
-  Pause,
-  Maximize2,
 } from "lucide-react";
+
 
 import fotoBersama from "@/assets/FOTOBERSAMA.jpg.asset.json";
 import bph from "@/assets/BPH.jpg.asset.json";
@@ -41,17 +37,89 @@ import fungsionaris from "@/assets/fungsionaris.jpg.asset.json";
 import kominfo2 from "@/assets/kominfo2.jpg.asset.json";
 import fotobersama2 from "@/assets/fotobersama-2.jpg.asset.json";
 
+const SITE = "https://id-preview--65b75f9d-e30c-4e65-bc38-95e32e144ce3.lovable.app";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { title: "UKM Kependudukan UNESA | Suara Muda Isu Kependudukan" },
       {
-        property: "og:image",
-        content: `https://id-preview--65b75f9d-e30c-4e65-bc38-95e32e144ce3.lovable.app${fotoBersama.url}`,
+        name: "description",
+        content:
+          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, artikel, dan informasi media partner.",
+      },
+      { property: "og:title", content: "UKM Kependudukan UNESA" },
+      {
+        property: "og:description",
+        content: "Wadah mahasiswa UNESA untuk mengkaji, mengadvokasi, dan mengedukasi isu demografi Indonesia.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: `${SITE}${fotoBersama.url}` },
+      { name: "twitter:image", content: `${SITE}${fotoBersama.url}` },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": `${SITE}/#organization`,
+              name: "UKM Kependudukan Universitas Negeri Surabaya",
+              alternateName: "UKM Kependudukan UNESA",
+              url: SITE,
+              logo: `${SITE}${logoUkm.url}`,
+              image: `${SITE}${fotoBersama.url}`,
+              foundingDate: "2014-03-08",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "UKM Center Lantai 3.4, Kampus UNESA Ketintang",
+                addressLocality: "Surabaya",
+                addressRegion: "Jawa Timur",
+                addressCountry: "ID",
+              },
+              sameAs: [
+                "https://instagram.com/ukmkependudukanunesa",
+                "https://tiktok.com/@ukmkependudukanunesaa",
+              ],
+            },
+            ...ARTIKEL.map((a) => ({
+              "@type": "Article",
+              headline: a.title,
+              description: a.excerpt,
+              image: `${SITE}${a.image}`,
+              datePublished: a.date,
+              author: { "@type": "Organization", name: a.author },
+              publisher: { "@id": `${SITE}/#organization` },
+              mainEntityOfPage: `${SITE}/#artikel`,
+            })),
+            ...PROKER.map((p) => ({
+              "@type": "Event",
+              name: p.name,
+              description: p.desc,
+              startDate: `${p.start.slice(0, 4)}-${p.start.slice(4, 6)}-${p.start.slice(6, 8)}`,
+              endDate: `${(p.end ?? p.start).slice(0, 4)}-${(p.end ?? p.start).slice(4, 6)}-${(p.end ?? p.start).slice(6, 8)}`,
+              eventStatus: "https://schema.org/EventScheduled",
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+              location: {
+                "@type": "Place",
+                name: p.location ?? "Universitas Negeri Surabaya",
+                address: { "@type": "PostalAddress", addressLocality: "Surabaya", addressCountry: "ID" },
+              },
+              organizer: { "@id": `${SITE}/#organization` },
+            })),
+          ],
+        }),
       },
     ],
   }),
   component: Home,
 });
+
 
 const NAV = [
   { label: "Beranda", href: "#beranda" },
@@ -442,6 +510,7 @@ function Navbar() {
           <img
             src={logoUkm.url}
             alt="Logo UKM Kependudukan UNESA"
+            decoding="async"
             className={`h-10 w-10 rounded-full object-contain transition ${scrolled ? "bg-white" : "bg-white/95"} p-0.5 ring-1 ring-white/40`}
           />
           <div className={`leading-tight ${scrolled ? "text-foreground" : "text-white"}`}>
@@ -516,13 +585,15 @@ function Hero() {
       <img
         src={fotoBersama.url}
         alt="Pengurus UKM Kependudukan UNESA di depan Universitas Negeri Surabaya"
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/75 via-navy-deep/65 to-navy-deep/90" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,oklch(0.14_0.05_260/0.55)_100%)]" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh max-w-[1400px] flex-col items-center justify-center px-6 pb-24 pt-32 text-center lg:px-10 lg:pt-40">
-        <div className="mb-8 inline-flex items-center gap-3 text-white/70">
+        <div className="mb-8 inline-flex items-center gap-3 text-white/85">
           <span className="h-px w-10 bg-gold" />
           <span className="text-[11px] uppercase tracking-[0.35em]">Sejak 2014 di Kampus Ketintang</span>
           <span className="h-px w-10 bg-gold" />
@@ -533,7 +604,7 @@ function Hero() {
           <span className="italic text-gold">kependudukan.</span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-2xl text-balance text-base leading-relaxed text-white/85 lg:text-lg">
+        <p className="mx-auto mt-8 max-w-2xl text-balance text-base leading-relaxed text-white/90 lg:text-lg">
           UKM Kependudukan Universitas Negeri Surabaya adalah wadah mahasiswa untuk mengkaji, mengadvokasi, dan mengedukasi persoalan demografi Indonesia lewat riset, aksi, dan kolaborasi lintas disiplin.
         </p>
 
@@ -560,7 +631,7 @@ function Hero() {
           <Stat n={20} suffix="+" label="Program kerja tahunan" />
         </div>
 
-        <div className="pointer-events-none absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-white/60 lg:flex">
+        <div className="pointer-events-none absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-white/85 lg:flex">
           <ChevronDown className="h-4 w-4 animate-bounce" />
           <span className="text-[10px] uppercase tracking-[0.3em]">Gulir untuk menjelajah</span>
         </div>
@@ -604,7 +675,7 @@ function Stat({ n, suffix = "", label }: { n: number; suffix?: string; label: st
         {val}
         <span className="text-gold">{suffix}</span>
       </div>
-      <div className="mt-3 text-xs uppercase tracking-[0.25em] text-white/60">{label}</div>
+      <div className="mt-3 text-xs uppercase tracking-[0.25em] text-white/85">{label}</div>
     </div>
   );
 }
@@ -649,11 +720,13 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   return (
     <div
       ref={ref}
-      className={`transition-all duration-1000 ${shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"} ${className}`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
+      className={`transition-[opacity,transform] duration-[380ms] will-change-transform ${shown ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${className}`}
     >
       {children}
     </div>
   );
+
 }
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
@@ -668,13 +741,13 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
 
 function About() {
   return (
-    <section id="tentang" className="relative bg-bone py-28 lg:py-40">
+    <section id="tentang" className="relative bg-bone py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" className="h-full w-full object-cover" />
+                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-deep to-transparent p-6 text-white">
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Sekretariat</div>
                   <div className="mt-1 text-sm">UKM Center Lantai 3.4 UNESA Ketintang</div>
@@ -733,11 +806,11 @@ function VisiMisi() {
     "Menumbuhkan kader yang kritis, kolaboratif, dan berkontribusi.",
   ];
   return (
-    <section className="relative overflow-hidden bg-navy-deep py-28 text-white lg:py-40">
+    <section className="relative overflow-hidden bg-navy-deep py-24 text-white lg:py-32">
       <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 02">
-          <span className="text-white/60">Visi & Misi</span>
+          <span className="text-white/85">Visi & Misi</span>
         </SectionLabel>
         <Reveal>
           <h2 className="font-display text-4xl leading-[1.1] tracking-tight lg:text-[5.5rem]">
@@ -765,7 +838,7 @@ function Divisi() {
   const [active, setActive] = useState<Divisi | null>(null);
 
   return (
-    <section id="divisi" className="bg-background py-28 lg:py-40">
+    <section id="divisi" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
@@ -785,31 +858,36 @@ function Divisi() {
           </div>
         </div>
 
-        <div className="mt-20 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {DIVISI.map((d) => (
-            <Reveal key={d.code}>
+        <div className="mt-16 grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-6">
+          {DIVISI.map((d, i) => (
+            <Reveal
+              key={d.code}
+              className={`h-full ${i < 3 ? "lg:col-span-2" : "lg:col-span-3"} ${i === DIVISI.length - 1 ? "md:col-span-2 lg:col-span-3" : ""}`}
+            >
               <button
                 type="button"
                 onClick={() => setActive(d)}
-                className="group relative block h-full w-full overflow-hidden rounded-sm text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="group relative block h-full w-full overflow-hidden rounded-xl text-left shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
                 aria-label={`Buka profil divisi ${d.name}`}
               >
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+                <div className="relative h-full min-h-[380px] w-full overflow-hidden bg-muted">
                   <img
                     src={d.image}
                     alt={`Divisi ${d.name}`}
-                    className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
-                  <div className="absolute left-5 top-5 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/50 to-navy-deep/10" />
+                  <div className="absolute left-5 top-5 rounded-full bg-white px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
                     Divisi {d.code}
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-6 text-white">
                     <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">{d.short}</div>
                     <h3 className="mt-2 font-display text-2xl leading-tight lg:text-3xl">{d.name}</h3>
-                    <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-white/90">
+                    <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-white">
                       Lihat profil
-                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 ease-in-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </div>
                   </div>
                 </div>
@@ -817,6 +895,7 @@ function Divisi() {
             </Reveal>
           ))}
         </div>
+
       </div>
 
       {active && <DivisiModal divisi={active} onClose={() => setActive(null)} />}
@@ -844,15 +923,15 @@ function DivisiModal({ divisi, onClose }: { divisi: Divisi; onClose: () => void 
       role="dialog"
       aria-modal="true"
       aria-labelledby="divisi-modal-title"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/85 p-4 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[92vh] w-full max-w-4xl overflow-y-auto rounded-sm bg-background shadow-2xl animate-scale-in"
+        className="relative max-h-[80vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-background shadow-2xl animate-modal-panel sm:w-[80vw]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
-          <img src={divisi.image} alt={`Banner ${divisi.name}`} className="h-full w-full object-cover" />
+          <img src={divisi.image} alt={`Banner ${divisi.name}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
           <button
             onClick={onClose}
@@ -1060,7 +1139,7 @@ function ProgramKerja() {
   };
 
   return (
-    <section id="program" className="bg-bone py-28 lg:py-40">
+    <section id="program" className="bg-bone py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 04">Program Kerja</SectionLabel>
         <div className="grid items-end gap-8 lg:grid-cols-12">
@@ -1200,11 +1279,11 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/80 p-4 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-sm bg-background p-8 shadow-2xl animate-scale-in lg:p-12"
+        className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-background p-8 shadow-2xl animate-modal-panel sm:w-[70vw] lg:p-12"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -1257,99 +1336,13 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
   );
 }
 
-// ==================== Galeri (horizontal snap slider) ====================
+// ==================== Galeri (static grid + modal) ====================
 
 function Galeri() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [playing, setPlaying] = useState(true);
-  const [lightbox, setLightbox] = useState<number | null>(null);
-
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const children = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
-      const center = el.scrollLeft + el.clientWidth / 2;
-      let closest = 0;
-      let closestDist = Infinity;
-      children.forEach((c, i) => {
-        const mid = c.offsetLeft + c.offsetWidth / 2;
-        const d = Math.abs(mid - center);
-        if (d < closestDist) {
-          closestDist = d;
-          closest = i;
-        }
-      });
-      setActiveIdx(closest);
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // autoplay
-  useEffect(() => {
-    if (!playing || lightbox !== null) return;
-    const id = setInterval(() => {
-      const el = scrollerRef.current;
-      if (!el) return;
-      const children = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
-      const next = (activeIdx + 1) % children.length;
-      children[next]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    }, 4200);
-    return () => clearInterval(id);
-  }, [playing, activeIdx, lightbox]);
-
-  // drag to scroll
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
-    const down = (e: MouseEvent) => {
-      isDown = true;
-      el.classList.add("cursor-grabbing");
-      startX = e.pageX - el.offsetLeft;
-      scrollLeft = el.scrollLeft;
-      setPlaying(false);
-    };
-    const up = () => {
-      isDown = false;
-      el.classList.remove("cursor-grabbing");
-    };
-    const move = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - el.offsetLeft;
-      el.scrollLeft = scrollLeft - (x - startX);
-    };
-    el.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    el.addEventListener("mouseleave", up);
-    el.addEventListener("mousemove", move);
-    return () => {
-      el.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
-      el.removeEventListener("mouseleave", up);
-      el.removeEventListener("mousemove", move);
-    };
-  }, []);
-
-  const scrollTo = (i: number) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const children = Array.from(el.querySelectorAll<HTMLElement>("[data-slide]"));
-    children[i]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  };
-  const next = () => scrollTo(Math.min(activeIdx + 1, GALERI.length - 1));
-  const prev = () => scrollTo(Math.max(activeIdx - 1, 0));
-
-  const active = GALERI[activeIdx];
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="galeri" className="overflow-hidden bg-background py-28 lg:py-40">
+    <section id="galeri" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
@@ -1362,126 +1355,53 @@ function Galeri() {
           </div>
           <div className="lg:col-span-4">
             <Reveal>
-              <p className="text-muted-foreground">
-                Geser dengan scroll horizontal, drag mouse, atau sentuhan pada mobile. Klik foto untuk membuka tampilan lightbox penuh layar dan unduh dokumentasi.
+              <p className="text-navy/80">
+                Telusuri dokumentasi kegiatan dengan menggulir halaman. Klik salah satu foto untuk membukanya lebih besar beserta keterangan kegiatan.
               </p>
             </Reveal>
           </div>
         </div>
-      </div>
 
-      <div
-        ref={scrollerRef}
-        className="mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-[10vw] py-6 cursor-grab lg:gap-8 lg:py-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        onMouseEnter={() => setPlaying(false)}
-        onMouseLeave={() => setPlaying(true)}
-        onTouchStart={() => setPlaying(false)}
-        aria-label="Galeri foto UKM Kependudukan UNESA"
-      >
-        {GALERI.map((g, i) => {
-          const isActive = i === activeIdx;
-          return (
-            <div
-              key={g.filename}
-              data-slide
-              className={`relative shrink-0 snap-center overflow-hidden rounded-sm shadow-2xl transition-all duration-700 ease-out ${
-                isActive
-                  ? "aspect-[4/3] w-[85vw] scale-100 opacity-100 blur-0 lg:w-[62vw]"
-                  : "aspect-[4/3] w-[70vw] scale-[0.86] opacity-70 blur-[2px] lg:w-[46vw]"
-              }`}
-            >
-              <img
-                src={g.src}
-                alt={g.cat}
-                draggable={false}
-                className="pointer-events-none h-full w-full object-cover"
-              />
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {GALERI.map((g, i) => (
+            <Reveal key={g.filename} className="h-full">
               <button
                 type="button"
-                onClick={() => setLightbox(i)}
-                className="absolute inset-0 flex items-end justify-between p-6 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:p-10"
-                aria-label={`Buka lightbox foto ${g.cat}`}
+                onClick={() => setOpenIdx(i)}
+                aria-label={`Buka foto ${g.cat}`}
+                className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-border bg-card text-left shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
               >
-                <div className={`transition duration-500 ${isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold drop-shadow">Dokumentasi · {g.date}</div>
-                  <div className="mt-2 font-display text-2xl leading-tight drop-shadow lg:text-4xl">{g.cat}</div>
-                  <p className="mt-2 max-w-lg text-sm text-white/85 drop-shadow">{g.desc}</p>
+                <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
+                  <img
+                    src={g.src}
+                    alt={g.cat}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
+                  />
                 </div>
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/90 text-navy-deep">
-                  <Maximize2 className="h-4 w-4" />
-                </span>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-navy">{g.date}</div>
+                  <h3 className="mt-2 font-display text-xl leading-snug text-navy-deep">{g.cat}</h3>
+                  <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-navy/80">{g.desc}</p>
+                </div>
               </button>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy-deep/80 to-transparent" />
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mx-auto mt-6 flex max-w-[1400px] items-center justify-between gap-4 px-6 lg:px-10">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={prev}
-            aria-label="Foto sebelumnya"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border bg-background text-navy-deep transition hover:border-navy-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            onClick={next}
-            aria-label="Foto berikutnya"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-border bg-background text-navy-deep transition hover:border-navy-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-          <button
-            onClick={() => setPlaying((v) => !v)}
-            aria-label={playing ? "Jeda autoplay" : "Mainkan autoplay"}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-background px-4 text-[12px] font-semibold text-navy-deep transition hover:border-navy-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-            {playing ? "Jeda" : "Mainkan"}
-          </button>
-          <button
-            onClick={() => downloadImage(active.src, active.filename)}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-4 text-[12px] font-semibold text-navy-deep transition hover:bg-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-navy-deep"
-          >
-            <Download className="h-3.5 w-3.5" />
-            Unduh foto aktif
-          </button>
-        </div>
-        <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-          {String(activeIdx + 1).padStart(2, "0")} / {String(GALERI.length).padStart(2, "0")}
+            </Reveal>
+          ))}
         </div>
       </div>
 
-      {lightbox !== null && (
-        <Lightbox
-          items={GALERI}
-          index={lightbox}
-          onClose={() => setLightbox(null)}
-          onChange={setLightbox}
-        />
+      {openIdx !== null && (
+        <FotoModal item={GALERI[openIdx]} onClose={() => setOpenIdx(null)} />
       )}
     </section>
   );
 }
 
-function Lightbox({
-  items,
-  index,
-  onClose,
-  onChange,
-}: {
-  items: GaleriItem[];
-  index: number;
-  onClose: () => void;
-  onChange: (i: number) => void;
-}) {
+function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onChange((index + 1) % items.length);
-      if (e.key === "ArrowLeft") onChange((index - 1 + items.length) % items.length);
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -1489,63 +1409,49 @@ function Lightbox({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [index, items.length, onChange, onClose]);
+  }, [onClose]);
 
-  const g = items[index];
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Foto ${g.cat}`}
-      className="fixed inset-0 z-[110] flex flex-col bg-navy-deep/95 backdrop-blur-md animate-fade-up"
+      aria-label={`Foto ${item.cat}`}
       onClick={onClose}
+      className="fixed inset-0 z-[110] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
     >
-      <button
-        onClick={onClose}
-        aria-label="Tutup lightbox"
-        className="absolute right-4 top-4 z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/90 text-navy-deep transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative flex max-h-[80vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-card shadow-2xl animate-modal-panel sm:w-[70vw]"
       >
-        <X className="h-5 w-5" />
-      </button>
-      <div className="flex flex-1 items-center justify-center p-6" onClick={(e) => e.stopPropagation()}>
         <button
-          onClick={() => onChange((index - 1 + items.length) % items.length)}
-          aria-label="Foto sebelumnya"
-          className="mr-4 hidden min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:inline-flex"
+          onClick={onClose}
+          aria-label="Tutup"
+          className="absolute right-3 top-3 z-10 inline-flex min-h-11 min-w-11 items-center justify-center rounded-full bg-card/90 text-navy-deep shadow transition-colors duration-300 ease-in-out hover:bg-bone focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <X className="h-5 w-5" />
         </button>
-        <img
-          key={g.src}
-          src={g.src}
-          alt={g.cat}
-          className="max-h-[80vh] max-w-[90vw] rounded-sm object-contain animate-scale-in"
-        />
-        <button
-          onClick={() => onChange((index + 1) % items.length)}
-          aria-label="Foto berikutnya"
-          className="ml-4 hidden min-h-11 min-w-11 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:inline-flex"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
-      </div>
-      <div className="mx-auto flex w-full max-w-4xl flex-wrap items-end justify-between gap-4 px-6 pb-8 text-white" onClick={(e) => e.stopPropagation()}>
-        <div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Dokumentasi · {g.date}</div>
-          <div className="mt-2 font-display text-3xl">{g.cat}</div>
-          <p className="mt-2 max-w-2xl text-sm text-white/80">{g.desc}</p>
+        <div className="overflow-y-auto">
+          <img src={item.src} alt={item.cat} decoding="async" className="max-h-[52vh] w-full bg-muted object-contain" />
+          <div className="flex flex-wrap items-end justify-between gap-4 p-6">
+            <div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-navy">Dokumentasi · {item.date}</div>
+              <h3 className="mt-2 font-display text-2xl text-navy-deep">{item.cat}</h3>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-navy/80">{item.desc}</p>
+            </div>
+            <button
+              onClick={() => downloadImage(item.src, item.filename)}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-navy-deep px-5 py-2.5 text-[13px] font-semibold text-white transition-colors duration-300 ease-in-out hover:bg-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            >
+              <Download className="h-4 w-4" />
+              Unduh Foto
+            </button>
+          </div>
         </div>
-        <button
-          onClick={() => downloadImage(g.src, g.filename)}
-          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-[13px] font-semibold text-navy-deep transition hover:bg-gold-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-        >
-          <Download className="h-4 w-4" />
-          Unduh Foto
-        </button>
       </div>
     </div>
   );
 }
+
 
 // ==================== Artikel (editorial) ====================
 
@@ -1576,10 +1482,10 @@ function Artikel() {
   const tail = rest.slice(2);
 
   return (
-    <section id="artikel" className="bg-navy-deep py-28 text-white lg:py-40">
+    <section id="artikel" className="bg-navy-deep py-24 text-white lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 06">
-          <span className="text-white/60">Artikel</span>
+          <span className="text-white/85">Artikel</span>
         </SectionLabel>
         <Reveal>
           <h2 className="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight lg:text-7xl">
@@ -1590,14 +1496,14 @@ function Artikel() {
         <Reveal>
           <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <label className="relative flex w-full items-center lg:max-w-md">
-              <Search className="pointer-events-none absolute left-4 h-4 w-4 text-white/50" aria-hidden="true" />
+              <Search className="pointer-events-none absolute left-4 h-4 w-4 text-white/80" aria-hidden="true" />
               <span className="sr-only">Cari artikel</span>
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Cari judul, kategori, atau penulis"
-                className="min-h-11 w-full rounded-full border border-white/20 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/50 backdrop-blur-md focus:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="min-h-11 w-full rounded-full border border-white/20 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/80 backdrop-blur-md focus:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
               />
             </label>
             <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter kategori artikel">
@@ -1618,7 +1524,7 @@ function Artikel() {
         </Reveal>
 
         {filtered.length === 0 && (
-          <div className="mt-20 rounded-sm border border-dashed border-white/20 p-12 text-center text-sm text-white/60">
+          <div className="mt-20 rounded-sm border border-dashed border-white/20 p-12 text-center text-sm text-white/85">
             Tidak ada artikel yang cocok dengan pencarian Anda.
           </div>
         )}
@@ -1634,14 +1540,16 @@ function Artikel() {
                 <img
                   src={featured.image}
                   alt={featured.title}
-                  className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
                 <div className="absolute left-6 top-6 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
                   Featured · {featured.cat}
                 </div>
               </div>
               <div className="lg:col-span-4 lg:pt-4">
-                <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/60">
+                <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/85">
                   {featured.date} · {featured.readTime}
                 </div>
                 <h3 className="mt-4 font-display text-4xl leading-tight lg:text-5xl">
@@ -1693,13 +1601,15 @@ function ArtikelCard({ a, large = false, onOpen }: { a: Artikel; large?: boolean
           <img
             src={a.image}
             alt={a.title}
-            className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.05]"
           />
           <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
             {a.cat}
           </div>
         </div>
-        <div className={`mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-white/60`}>
+        <div className={`mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-white/85`}>
           {a.date} · {a.readTime}
         </div>
         <h3 className={`mt-3 font-display leading-tight text-white ${large ? "text-3xl lg:text-4xl" : "text-2xl lg:text-3xl"}`}>
@@ -1707,7 +1617,7 @@ function ArtikelCard({ a, large = false, onOpen }: { a: Artikel; large?: boolean
             {a.title}
           </span>
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/70">{a.excerpt}</p>
+        <p className="mt-3 text-sm leading-relaxed text-white/85">{a.excerpt}</p>
         <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
           Baca selengkapnya
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -1734,15 +1644,15 @@ function ArtikelModal({ artikel, onClose }: { artikel: Artikel; onClose: () => v
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/85 p-4 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
       <div
-        className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-sm bg-background text-navy-deep shadow-2xl animate-scale-in"
+        className="relative max-h-[80vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-background text-navy-deep shadow-2xl animate-modal-panel sm:w-[75vw]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
-          <img src={artikel.image} alt={artikel.title} className="h-full w-full object-cover" />
+          <img src={artikel.image} alt={artikel.title} loading="lazy" decoding="async" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 to-transparent" />
           <button
             onClick={onClose}
@@ -1780,7 +1690,7 @@ function MediaPartner() {
   ];
 
   return (
-    <section id="media-partner" className="bg-background py-28 lg:py-40">
+    <section id="media-partner" className="bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
@@ -1844,7 +1754,7 @@ function MediaPartner() {
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">Narahubung</div>
                 <div className="mt-1 font-display text-3xl">Kak Bagas</div>
-                <div className="text-sm text-white/70">0857-8475-2845 · Informasi lebih lanjut media partner</div>
+                <div className="text-sm text-white/85">0857-8475-2845 · Informasi lebih lanjut media partner</div>
               </div>
             </div>
             <a
@@ -1875,7 +1785,7 @@ function Kontak() {
   ];
 
   return (
-    <section id="kontak" className="bg-bone py-28 lg:py-40">
+    <section id="kontak" className="bg-bone py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionLabel n="/ 08">Kontak</SectionLabel>
         <Reveal>
@@ -1942,13 +1852,13 @@ function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <img src={logoUkm.url} alt="Logo UKM Kependudukan UNESA" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
+              <img src={logoUkm.url} alt="Logo UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
               <div>
-                <div className="text-[10px] uppercase tracking-[0.3em] text-white/60">UNESA</div>
+                <div className="text-[10px] uppercase tracking-[0.3em] text-white/85">UNESA</div>
                 <div className="text-sm font-medium">UKM Kependudukan</div>
               </div>
             </div>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-white/70">
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-white/85">
               Wadah mahasiswa Universitas Negeri Surabaya untuk mengkaji, mengadvokasi, dan mengedukasi isu kependudukan Indonesia sejak 2014.
             </p>
           </div>
@@ -1972,20 +1882,20 @@ function Footer() {
               Surabaya, Jawa Timur
             </p>
             <div className="mt-6 flex items-center gap-4">
-              <a href="https://instagram.com/ukmkependudukanunesa" aria-label="Instagram" className="text-white/70 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+              <a href="https://instagram.com/ukmkependudukanunesa" aria-label="Instagram" className="text-white/85 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="https://tiktok.com/@ukmkependudukanunesaa" aria-label="TikTok" className="text-white/70 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+              <a href="https://tiktok.com/@ukmkependudukanunesaa" aria-label="TikTok" className="text-white/85 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
                 <Music2 className="h-5 w-5" />
               </a>
-              <a href="#" aria-label="YouTube" className="text-white/70 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
+              <a href="#" aria-label="YouTube" className="text-white/85 hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/50 sm:flex-row sm:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/80 sm:flex-row sm:items-center">
           <div>© {new Date().getFullYear()} UKM Kependudukan UNESA. Seluruh hak cipta dilindungi.</div>
           <div className="font-mono">Dibuat dengan hati di Surabaya.</div>
         </div>
