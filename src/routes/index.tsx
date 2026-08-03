@@ -510,6 +510,7 @@ function Navbar() {
           <img
             src={logoUkm.url}
             alt="Logo UKM Kependudukan UNESA"
+            decoding="async"
             className={`h-10 w-10 rounded-full object-contain transition ${scrolled ? "bg-white" : "bg-white/95"} p-0.5 ring-1 ring-white/40`}
           />
           <div className={`leading-tight ${scrolled ? "text-foreground" : "text-white"}`}>
@@ -584,6 +585,8 @@ function Hero() {
       <img
         src={fotoBersama.url}
         alt="Pengurus UKM Kependudukan UNESA di depan Universitas Negeri Surabaya"
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/75 via-navy-deep/65 to-navy-deep/90" />
@@ -1537,7 +1540,9 @@ function Artikel() {
                 <img
                   src={featured.image}
                   alt={featured.title}
-                  className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
                 />
                 <div className="absolute left-6 top-6 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
                   Featured · {featured.cat}
@@ -1596,7 +1601,9 @@ function ArtikelCard({ a, large = false, onOpen }: { a: Artikel; large?: boolean
           <img
             src={a.image}
             alt={a.title}
-            className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.05]"
           />
           <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
             {a.cat}
