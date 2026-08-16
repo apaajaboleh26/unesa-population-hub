@@ -434,12 +434,12 @@ function Navbar() {
 function Hero() {
   return (
     <section id="beranda" className="relative min-h-dvh w-full overflow-hidden">
-      <img
+      <BlurImage
         src={fotoBersama.url}
         alt="Pengurus UKM Kependudukan UNESA di depan Universitas Negeri Surabaya"
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
+        priority
+        wrapperClassName="absolute inset-0 h-full w-full"
+        className="h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/75 via-navy-deep/65 to-navy-deep/90" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,oklch(0.14_0.05_260/0.55)_100%)]" />
@@ -581,6 +581,101 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 
 }
 
+// ==================== A11y modal helper ====================
+
+function useModalA11y(onClose: () => void) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prevActive = document.activeElement as HTMLElement | null;
+    const node = ref.current;
+    const focusables = () =>
+      Array.from(
+        node?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+
+    const first = focusables()[0] ?? node;
+    first?.focus({ preventScroll: true });
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = focusables();
+      if (items.length === 0) {
+        e.preventDefault();
+        return;
+      }
+      const firstEl = items[0];
+      const lastEl = items[items.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey && (active === firstEl || !node?.contains(active))) {
+        e.preventDefault();
+        lastEl.focus();
+      } else if (!e.shiftKey && (active === lastEl || !node?.contains(active))) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey, true);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey, true);
+      document.body.style.overflow = prevOverflow;
+      prevActive?.focus?.({ preventScroll: true });
+    };
+  }, [onClose]);
+
+  return ref;
+}
+
+// ==================== Gambar dengan skeleton + blur ====================
+
+function BlurImage({
+  src,
+  alt,
+  className = "",
+  wrapperClassName = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  wrapperClassName?: string;
+  priority?: boolean;
+}) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden bg-muted ${wrapperClassName}`}>
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 bg-gradient-to-br from-muted via-bone to-muted transition-opacity duration-300 ease-in-out ${
+          loaded ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <img
+        src={src}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        {...(priority ? { fetchPriority: "high" as const } : {})}
+        onLoad={() => setLoaded(true)}
+        className={`${className} transition-[opacity,filter] duration-300 ease-in-out ${
+          loaded ? "opacity-100 blur-0" : "opacity-0 blur-md"
+        }`}
+      />
+    </div>
+  );
+}
+
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
     <div className="mb-8 flex items-center gap-4 text-muted-foreground">
@@ -599,7 +694,7 @@ function About() {
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                <BlurImage src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" wrapperClassName="h-full w-full" className="h-full w-full object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-deep to-transparent p-6 text-white">
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Sekretariat</div>
                   <div className="mt-1 text-sm">UKM Center Lantai 3.4 UNESA Ketintang</div>
@@ -783,7 +878,7 @@ function DivisiModal({ divisi, onClose }: { divisi: Divisi; onClose: () => void 
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative aspect-[21/9] w-full overflow-hidden">
-          <img src={divisi.image} alt={`Banner ${divisi.name}`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+          <BlurImage src={divisi.image} alt={`Banner ${divisi.name}`} wrapperClassName="h-full w-full" className="h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/40 to-transparent" />
           <button
             onClick={onClose}
@@ -1223,15 +1318,12 @@ function Galeri() {
                 aria-label={`Buka foto ${g.cat}`}
                 className="group flex h-full w-full flex-col overflow-hidden rounded-xl border border-border bg-card text-left shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
               >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
-                  <img
-                    src={g.src}
-                    alt={g.cat}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                  />
-                </div>
+                <BlurImage
+                  src={g.src}
+                  alt={g.cat}
+                  wrapperClassName="aspect-[4/3] w-full"
+                  className="h-full w-full object-cover group-hover:scale-[1.04]"
+                />
                 <div className="flex flex-1 flex-col p-5">
                   <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-navy">{g.date}</div>
                   <h3 className="mt-2 font-display text-xl leading-snug text-navy-deep">{g.cat}</h3>
@@ -1283,7 +1375,7 @@ function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void })
           <X className="h-5 w-5" />
         </button>
         <div className="overflow-y-auto">
-          <img src={item.src} alt={item.cat} decoding="async" className="max-h-[52vh] w-full bg-muted object-contain" />
+          <BlurImage src={item.src} alt={item.cat} priority wrapperClassName="w-full" className="max-h-[52vh] w-full object-contain" />
           <div className="flex flex-wrap items-end justify-between gap-4 p-6">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-navy">Dokumentasi · {item.date}</div>
