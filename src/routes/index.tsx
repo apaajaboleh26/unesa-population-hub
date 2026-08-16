@@ -851,17 +851,7 @@ function Divisi() {
 }
 
 function DivisiModal({ divisi, onClose }: { divisi: Divisi; onClose: () => void }) {
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onEsc);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onEsc);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+  const panelRef = useModalA11y(onClose);
 
   const prokerDiv = PROKER.filter((p) => p.divCode === divisi.code);
 
@@ -874,6 +864,8 @@ function DivisiModal({ divisi, onClose }: { divisi: Divisi; onClose: () => void 
       onClick={onClose}
     >
       <div
+        ref={panelRef}
+        tabIndex={-1}
         className="relative max-h-[80vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-background shadow-2xl animate-modal-panel sm:w-[80vw]"
         onClick={(e) => e.stopPropagation()}
       >
@@ -1210,17 +1202,7 @@ function FilterPill({ active, onClick, children }: { active: boolean; onClick: (
 }
 
 function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose: () => void; onDownload: () => void }) {
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onEsc);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onEsc);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+  const panelRef = useModalA11y(onClose);
 
   return (
     <div
@@ -1230,6 +1212,8 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
       onClick={onClose}
     >
       <div
+        ref={panelRef}
+        tabIndex={-1}
         className="relative max-h-[80vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-background p-8 shadow-2xl animate-modal-panel sm:w-[70vw] lg:p-12"
         onClick={(e) => e.stopPropagation()}
       >
@@ -1343,17 +1327,7 @@ function Galeri() {
 }
 
 function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
+  const panelRef = useModalA11y(onClose);
 
   return (
     <div
@@ -1364,6 +1338,8 @@ function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void })
       className="fixed inset-0 z-[110] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
     >
       <div
+        ref={panelRef}
+        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
         className="relative flex max-h-[80vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-card shadow-2xl animate-modal-panel sm:w-[70vw]"
       >
