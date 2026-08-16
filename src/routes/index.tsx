@@ -1208,6 +1208,7 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
     <div
       role="dialog"
       aria-modal="true"
+      aria-labelledby="proker-modal-title"
       className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
       onClick={onClose}
     >
@@ -1225,7 +1226,7 @@ function ProkerModal({ proker, onClose, onDownload }: { proker: Proker; onClose:
           <X className="h-5 w-5" />
         </button>
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Divisi {proker.divCode} · {proker.divShort}</div>
-        <h3 className="mt-3 font-display text-3xl leading-tight text-navy-deep lg:text-5xl">{proker.name}</h3>
+        <h3 id="proker-modal-title" className="mt-3 font-display text-3xl leading-tight text-navy-deep lg:text-5xl">{proker.name}</h3>
         <div className="mt-6 space-y-3 border-y border-border py-6 text-sm">
           <div className="flex items-start gap-3">
             <Clock className="mt-0.5 h-4 w-4 text-gold" />
