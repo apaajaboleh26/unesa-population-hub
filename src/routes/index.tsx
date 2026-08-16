@@ -21,23 +21,23 @@ import {
 } from "lucide-react";
 
 
-import fotoBersama from "@/assets/FOTOBERSAMA.jpg.asset.json";
-import bph from "@/assets/BPH.jpg.asset.json";
-import ap from "@/assets/AP.jpeg.asset.json";
-import ppm from "@/assets/PPM.jpeg.asset.json";
-import litbang from "@/assets/LITBANG.jpeg.asset.json";
-import kominfo from "@/assets/KOMINFO.jpg.asset.json";
-import logoUkm from "@/assets/logo-ukm.png.asset.json";
-import familyGathering from "@/assets/family-gathering.jpg.asset.json";
-import capacityBuilding from "@/assets/capacity-building.jpeg.asset.json";
-import studiBanding from "@/assets/studi-banding.jpeg.asset.json";
-import sinergia from "@/assets/sinergia.jpeg.asset.json";
-import photobox from "@/assets/photobox.jpeg.asset.json";
-import fungsionaris from "@/assets/fungsionaris.jpg.asset.json";
-import kominfo2 from "@/assets/kominfo2.jpg.asset.json";
-import fotobersama2 from "@/assets/fotobersama-2.jpg.asset.json";
+import fotoBersama from "@/assets/images/fotobersama-2.jpg";
+import bph from "@/assets/images/BPH.jpg";
+import ap from "@/assets/images/AP.jpeg";
+import ppm from "@/assets/images/PPM.jpeg";
+import litbang from "@/assets/images/LITBANG.jpeg";
+import kominfo from "@/assets/images/KOMINFO.jpg";
+import logoUkm from "@/assets/images/logo-ukm.png";
+import familyGathering from "@/assets/images/family-gathering.jpg";
+import capacityBuilding from "@/assets/images/capacity-building.jpeg";
+import studiBanding from "@/assets/images/studi-banding.jpeg";
+import sinergia from "@/assets/images/sinergia.jpeg";
+import photobox from "@/assets/images/photobox.jpeg";
+import fungsionaris from "@/assets/images/fotobersama-2.jpg";
+import kominfo2 from "@/assets/images/kominfo2.jpg";
+import fotobersama2 from "@/assets/images/fotobersama-2.jpg";
 
-const SITE = "https://id-preview--65b75f9d-e30c-4e65-bc38-95e32e144ce3.lovable.app";
+const SITE = "https://kependudukanunesa.vercel.app";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -56,8 +56,8 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: `${SITE}${fotoBersama.url}` },
-      { name: "twitter:image", content: `${SITE}${fotoBersama.url}` },
+      { property: "og:image", content: `${SITE}${fotoBersama}` },
+      { name: "twitter:image", content: `${SITE}${fotoBersama}` },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
@@ -72,8 +72,8 @@ export const Route = createFileRoute("/")({
               name: "UKM Kependudukan Universitas Negeri Surabaya",
               alternateName: "UKM Kependudukan UNESA",
               url: SITE,
-              logo: `${SITE}${logoUkm.url}`,
-              image: `${SITE}${fotoBersama.url}`,
+              logo: `${SITE}${logoUkm}`,
+              image: `${SITE}${fotoBersama}`,
               foundingDate: "2014-03-08",
               address: {
                 "@type": "PostalAddress",
@@ -151,7 +151,7 @@ const DIVISI: Divisi[] = [
     code: "01",
     name: "Badan Pengurus Harian",
     short: "BPH",
-    image: bph.url,
+    image: bph,
     desc: "Motor koordinasi organisasi. Menjaga arah strategis, kaderisasi, dan tata kelola UKM Kependudukan dari perencanaan hingga evaluasi.",
     descLong:
       "Badan Pengurus Harian adalah simpul utama tata kelola UKM Kependudukan UNESA. BPH memastikan seluruh divisi bergerak dalam satu arah strategis, menjaga administrasi, keuangan, serta menjadi penyambung komunikasi lintas divisi dan lintas lembaga.",
@@ -175,7 +175,7 @@ const DIVISI: Divisi[] = [
     code: "02",
     name: "Advokasi dan Pergerakan",
     short: "AP",
-    image: ap.url,
+    image: ap,
     desc: "Suara isu kependudukan. Merancang kajian, aksi, dan diskusi publik untuk merespons persoalan demografi Indonesia hari ini.",
     descLong:
       "Divisi Advokasi dan Pergerakan menjadi corong isu kependudukan. Mereka menyiapkan bahan kajian, memantik diskusi publik, dan merancang aksi kolektif yang relevan dengan tantangan demografi Indonesia mutakhir.",
@@ -200,7 +200,7 @@ const DIVISI: Divisi[] = [
     code: "03",
     name: "Potensi dan Pengembangan Mahasiswa",
     short: "PPM",
-    image: ppm.url,
+    image: ppm,
     desc: "Ruang tumbuh anggota. Menyusun capacity building, pelatihan, dan pengembangan minat bakat mahasiswa lintas fakultas.",
     descLong:
       "Divisi Potensi dan Pengembangan Mahasiswa berfokus pada pertumbuhan personal setiap anggota. Melalui pelatihan, capacity building, dan pengembangan minat bakat, PPM merawat kader yang siap berkontribusi lintas ruang.",
@@ -224,7 +224,7 @@ const DIVISI: Divisi[] = [
     code: "04",
     name: "Penelitian dan Pengembangan",
     short: "Litbang",
-    image: litbang.url,
+    image: litbang,
     desc: "Basis data dan riset internal. Menghadirkan pendekatan ilmiah pada setiap program, dari asesmen anggota hingga riset lapangan.",
     descLong:
       "Divisi Penelitian dan Pengembangan adalah otak data organisasi. Litbang menyusun basis pengetahuan yang membuat setiap program kerja UKM Kependudukan berpijak pada riset dan bukti empiris.",
@@ -249,7 +249,7 @@ const DIVISI: Divisi[] = [
     code: "05",
     name: "Media Informasi, Teknologi dan Komunikasi",
     short: "Kominfo",
-    image: kominfo.url,
+    image: kominfo,
     desc: "Wajah publik organisasi. Mengelola konten, desain, publikasi digital, hingga kolaborasi media partner UKM Kependudukan.",
     descLong:
       "Divisi Kominfo menjaga wajah publik UKM Kependudukan UNESA. Mereka merawat konten media sosial, dokumentasi kegiatan, dan menjalin kerja sama dengan media partner untuk memperluas gema isu kependudukan.",
@@ -322,14 +322,14 @@ type GaleriItem = {
 };
 
 const GALERI: GaleriItem[] = [
-  { cat: "Foto Fungsionaris", src: fungsionaris.url, filename: "fungsionaris.jpg", date: "Periode 2026", desc: "Fungsionaris UKM Kependudukan UNESA periode aktif dalam sesi pemotretan resmi." },
-  { cat: "Foto Bersama UNESA", src: fotobersama2.url, filename: "foto-bersama-unesa.jpg", date: "Kampus Ketintang", desc: "Pengurus dan anggota UKM Kependudukan di depan tugu Universitas Negeri Surabaya." },
-  { cat: "Family Gathering", src: familyGathering.url, filename: "family-gathering.jpg", date: "2025", desc: "Momen kekeluargaan pengurus dan anggota di kafe outdoor Surabaya." },
-  { cat: "Capacity Building", src: capacityBuilding.url, filename: "capacity-building.jpg", date: "April 2026", desc: "Pelatihan dua hari untuk mengasah potensi dan kapasitas pengurus." },
-  { cat: "Studi Banding", src: studiBanding.url, filename: "studi-banding.jpg", date: "Juni 2026", desc: "Kunjungan ke Universitas Airlangga sebagai bagian dari kolaborasi advokasi." },
-  { cat: "Sinergia UNIPMA x UNAIR x UNESA", src: sinergia.url, filename: "sinergia.jpg", date: "2025", desc: "Sinergi tiga organisasi kependudukan lintas kampus dalam satu ruang diskusi." },
-  { cat: "Photobox Bersama", src: photobox.url, filename: "photobox.jpg", date: "2025", desc: "Sesi photobox playful pengurus di sela agenda organisasi." },
-  { cat: "Kominfo Behind the Scene", src: kominfo2.url, filename: "kominfo-bts.jpg", date: "2025", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
+  { cat: "Foto Fungsionaris", src: fungsionaris, filename: "fungsionaris.jpg", date: "Periode 2026", desc: "Fungsionaris UKM Kependudukan UNESA periode aktif dalam sesi pemotretan resmi." },
+  { cat: "Foto Bersama UNESA", src: fotobersama2, filename: "foto-bersama-unesa.jpg", date: "Kampus Ketintang", desc: "Pengurus dan anggota UKM Kependudukan di depan tugu Universitas Negeri Surabaya." },
+  { cat: "Family Gathering", src: familyGathering, filename: "family-gathering.jpg", date: "2025", desc: "Momen kekeluargaan pengurus dan anggota di kafe outdoor Surabaya." },
+  { cat: "Capacity Building", src: capacityBuilding, filename: "capacity-building.jpg", date: "April 2026", desc: "Pelatihan dua hari untuk mengasah potensi dan kapasitas pengurus." },
+  { cat: "Studi Banding", src: studiBanding, filename: "studi-banding.jpg", date: "Juni 2026", desc: "Kunjungan ke Universitas Airlangga sebagai bagian dari kolaborasi advokasi." },
+  { cat: "Sinergia UNIPMA x UNAIR x UNESA", src: sinergia, filename: "sinergia.jpg", date: "2025", desc: "Sinergi tiga organisasi kependudukan lintas kampus dalam satu ruang diskusi." },
+  { cat: "Photobox Bersama", src: photobox, filename: "photobox.jpg", date: "2025", desc: "Sesi photobox playful pengurus di sela agenda organisasi." },
+  { cat: "Kominfo Behind the Scene", src: kominfo2, filename: "kominfo-bts.jpg", date: "2025", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
 ];
 
 type Artikel = {
@@ -352,7 +352,7 @@ const ARTIKEL: Artikel[] = [
     date: "12 Januari 2026",
     author: "Divisi Litbang",
     readTime: "6 menit",
-    image: fotoBersama.url,
+    image: fotoBersama,
     excerpt: "Jendela peluang atau bom waktu? Sebuah tinjauan singkat bonus demografi dari perspektif pemuda hari ini.",
     content: [
       "Indonesia sedang berada di titik istimewa dalam sejarah demografinya. Rasio penduduk usia produktif diperkirakan mencapai puncaknya pada rentang 2020 hingga 2035, yang lazim disebut sebagai bonus demografi. Momen ini hanya terjadi satu kali dalam sejarah panjang suatu bangsa.",
@@ -367,7 +367,7 @@ const ARTIKEL: Artikel[] = [
     date: "17 Juli 2025",
     author: "Divisi Advokasi dan Pergerakan",
     readTime: "5 menit",
-    image: studiBanding.url,
+    image: studiBanding,
     excerpt: "Rangkaian puncak tahunan yang mempertemukan akademisi, praktisi, dan mahasiswa dalam satu meja diskusi.",
     content: [
       "The Great Population Event adalah agenda tahunan terbesar UKM Kependudukan UNESA. Rangkaiannya menyatukan seminar nasional, lomba karya tulis, dan diskusi publik lintas kampus.",
@@ -382,7 +382,7 @@ const ARTIKEL: Artikel[] = [
     date: "3 September 2025",
     author: "Divisi Litbang",
     readTime: "4 menit",
-    image: capacityBuilding.url,
+    image: capacityBuilding,
     excerpt: "Bagaimana teknologi mengubah cara kita memahami perencanaan keluarga dan kesehatan reproduksi.",
     content: [
       "Keluarga Berencana bukan lagi soal alat kontrasepsi semata. Ia telah bergeser menjadi ekosistem informasi yang menyentuh gaya hidup, keuangan keluarga, hingga kesehatan mental pasangan.",
@@ -397,7 +397,7 @@ const ARTIKEL: Artikel[] = [
     date: "22 Oktober 2025",
     author: "Divisi Litbang",
     readTime: "7 menit",
-    image: sinergia.url,
+    image: sinergia,
     excerpt: "Migrasi desa kota masih menjadi kekuatan utama pembentukan kota kota besar di Jawa Timur.",
     content: [
       "Surabaya bukan hanya kota, ia adalah magnet demografis Jawa Timur. Kawasan Gerbangkertasusila menampung mobilitas harian jutaan penduduk yang bergerak untuk bekerja dan bersekolah.",
@@ -412,7 +412,7 @@ const ARTIKEL: Artikel[] = [
     date: "5 November 2025",
     author: "Divisi Advokasi dan Pergerakan",
     readTime: "6 menit",
-    image: familyGathering.url,
+    image: familyGathering,
     excerpt: "Semakin tinggi pendidikan perempuan, semakin terkendali angka kelahiran. Fakta klasik yang selalu relevan.",
     content: [
       "Berbagai riset kependudukan konsisten menunjukkan pola yang sama. Perempuan dengan tingkat pendidikan lebih tinggi cenderung menikah lebih matang dan memiliki jumlah anak yang lebih terencana.",
@@ -427,7 +427,7 @@ const ARTIKEL: Artikel[] = [
     date: "18 Desember 2025",
     author: "Divisi Litbang",
     readTime: "5 menit",
-    image: fungsionaris.url,
+    image: fungsionaris,
     excerpt: "Setelah puncak bonus demografi, Indonesia akan memasuki era ageing population. Siap atau tidak.",
     content: [
       "Proyeksi BPS menyebut penduduk lansia Indonesia akan menembus 20 persen pada 2045. Ini adalah pergeseran struktural yang menuntut kesiapan lintas sektor.",
@@ -442,7 +442,7 @@ const ARTIKEL: Artikel[] = [
     date: "8 Februari 2026",
     author: "Divisi Kominfo",
     readTime: "3 menit",
-    image: kominfo2.url,
+    image: kominfo2,
     excerpt: "Sebulan sekali, POKA hadir membawa perbincangan kependudukan yang ringan namun berdasar data.",
     content: [
       "POKA adalah singkatan Podcast Kependudukan, kanal audio bulanan yang dikelola Divisi Litbang bersama Kominfo. Fokusnya membumikan isu demografi untuk pendengar muda.",
@@ -457,7 +457,7 @@ const ARTIKEL: Artikel[] = [
     date: "27 April 2026",
     author: "Divisi PPM",
     readTime: "4 menit",
-    image: photobox.url,
+    image: photobox,
     excerpt: "Dua hari intensif pelatihan pengurus untuk memperkuat kolaborasi antar divisi dan kepemimpinan diri.",
     content: [
       "Capacity Building 2026 mengangkat tagline Mengasah Potensi, Membangun Kapasitas, dan Menciptakan Dampak Nyata. Rangkaian dua hari ini menjadi titik akselerasi kepengurusan.",
@@ -508,7 +508,7 @@ function Navbar() {
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-10">
         <a href="#beranda" className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded">
           <img
-            src={logoUkm.url}
+            src={logoUkm}
             alt="Logo UKM Kependudukan UNESA"
             decoding="async"
             className={`h-10 w-10 rounded-full object-contain transition ${scrolled ? "bg-white" : "bg-white/95"} p-0.5 ring-1 ring-white/40`}
@@ -583,7 +583,7 @@ function Hero() {
   return (
     <section id="beranda" className="relative min-h-dvh w-full overflow-hidden">
       <img
-        src={fotoBersama.url}
+        src={fotoBersama}
         alt="Pengurus UKM Kependudukan UNESA di depan Universitas Negeri Surabaya"
         fetchPriority="high"
         decoding="async"
@@ -747,7 +747,7 @@ function About() {
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
-                <img src={fotoBersama.url} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                <img src={fotoBersama} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-deep to-transparent p-6 text-white">
                   <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">Sekretariat</div>
                   <div className="mt-1 text-sm">UKM Center Lantai 3.4 UNESA Ketintang</div>
@@ -1852,7 +1852,7 @@ function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3">
-              <img src={logoUkm.url} alt="Logo UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
+              <img src={logoUkm} alt="Logo UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-11 w-11 rounded-full bg-white object-contain p-0.5" />
               <div>
                 <div className="text-[10px] uppercase tracking-[0.3em] text-white/85">UNESA</div>
                 <div className="text-sm font-medium">UKM Kependudukan</div>
