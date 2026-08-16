@@ -14,7 +14,6 @@ import {
   Download,
   Filter,
   Clock,
-  Search,
   Users,
   Target,
   ListChecks,
@@ -46,7 +45,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, artikel, dan informasi media partner.",
+          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, dan informasi media partner.",
       },
       { property: "og:title", content: "UKM Kependudukan UNESA" },
       {
@@ -87,16 +86,6 @@ export const Route = createFileRoute("/")({
                 "https://tiktok.com/@ukmkependudukanunesaa",
               ],
             },
-            ...ARTIKEL.map((a) => ({
-              "@type": "Article",
-              headline: a.title,
-              description: a.excerpt,
-              image: `${SITE}${a.image}`,
-              datePublished: a.date,
-              author: { "@type": "Organization", name: a.author },
-              publisher: { "@id": `${SITE}/#organization` },
-              mainEntityOfPage: `${SITE}/#artikel`,
-            })),
             ...PROKER.map((p) => ({
               "@type": "Event",
               name: p.name,
@@ -127,7 +116,6 @@ const NAV = [
   { label: "Divisi", href: "#divisi" },
   { label: "Program Kerja", href: "#program" },
   { label: "Galeri", href: "#galeri" },
-  { label: "Artikel", href: "#artikel" },
   { label: "Media Partner", href: "#media-partner" },
   { label: "Kontak", href: "#kontak" },
 ];
@@ -332,141 +320,6 @@ const GALERI: GaleriItem[] = [
   { cat: "Kominfo Behind the Scene", src: kominfo2.url, filename: "kominfo-bts.jpg", date: "2025", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
 ];
 
-type Artikel = {
-  id: string;
-  cat: string;
-  title: string;
-  date: string;
-  author: string;
-  readTime: string;
-  excerpt: string;
-  image: string;
-  content: string[];
-};
-
-const ARTIKEL: Artikel[] = [
-  {
-    id: "bonus-demografi-2030",
-    cat: "Bonus Demografi",
-    title: "Membaca Ulang Bonus Demografi Indonesia 2030",
-    date: "12 Januari 2026",
-    author: "Divisi Litbang",
-    readTime: "6 menit",
-    image: fotoBersama.url,
-    excerpt: "Jendela peluang atau bom waktu? Sebuah tinjauan singkat bonus demografi dari perspektif pemuda hari ini.",
-    content: [
-      "Indonesia sedang berada di titik istimewa dalam sejarah demografinya. Rasio penduduk usia produktif diperkirakan mencapai puncaknya pada rentang 2020 hingga 2035, yang lazim disebut sebagai bonus demografi. Momen ini hanya terjadi satu kali dalam sejarah panjang suatu bangsa.",
-      "Namun bonus demografi bukan berkah otomatis. Ia hanya bekerja bila disertai investasi pendidikan, kesehatan, dan lapangan kerja yang memadai. Tanpa itu, kelebihan usia produktif justru menjadi tekanan sosial ekonomi baru.",
-      "Sebagai mahasiswa, kita berada persis di garis depan bonus demografi. Setiap keputusan pendidikan, kesehatan, dan karier kita hari ini adalah bagian dari cerita besar Indonesia 2045.",
-    ],
-  },
-  {
-    id: "catatan-gpe",
-    cat: "Kegiatan UKM",
-    title: "Catatan dari The Great Population Event",
-    date: "17 Juli 2025",
-    author: "Divisi Advokasi dan Pergerakan",
-    readTime: "5 menit",
-    image: studiBanding.url,
-    excerpt: "Rangkaian puncak tahunan yang mempertemukan akademisi, praktisi, dan mahasiswa dalam satu meja diskusi.",
-    content: [
-      "The Great Population Event adalah agenda tahunan terbesar UKM Kependudukan UNESA. Rangkaiannya menyatukan seminar nasional, lomba karya tulis, dan diskusi publik lintas kampus.",
-      "Tahun ini, tema besar yang diangkat adalah keluarga sebagai unit terkecil pembangunan. Pembahasan bergerak dari pengasuhan, kesehatan reproduksi, hingga tantangan generasi sandwich.",
-      "Yang menarik, sebagian besar peserta datang dari fakultas non sosial. Ini menjadi bukti bahwa isu kependudukan bersifat lintas disiplin dan menyentuh setiap ruang keilmuan.",
-    ],
-  },
-  {
-    id: "kb-digital",
-    cat: "Kependudukan",
-    title: "Keluarga Berencana di Era Digital",
-    date: "3 September 2025",
-    author: "Divisi Litbang",
-    readTime: "4 menit",
-    image: capacityBuilding.url,
-    excerpt: "Bagaimana teknologi mengubah cara kita memahami perencanaan keluarga dan kesehatan reproduksi.",
-    content: [
-      "Keluarga Berencana bukan lagi soal alat kontrasepsi semata. Ia telah bergeser menjadi ekosistem informasi yang menyentuh gaya hidup, keuangan keluarga, hingga kesehatan mental pasangan.",
-      "Aplikasi pelacak menstruasi, konsultasi daring, dan komunitas parenting daring adalah wajah baru Keluarga Berencana. Semuanya berjalan di ponsel yang setiap hari kita genggam.",
-      "Peran mahasiswa adalah memastikan literasi digital berjalan seimbang dengan literasi kesehatan reproduksi.",
-    ],
-  },
-  {
-    id: "urbanisasi-jatim",
-    cat: "Perkotaan",
-    title: "Urbanisasi Jawa Timur dan Wajah Surabaya Metropolitan",
-    date: "22 Oktober 2025",
-    author: "Divisi Litbang",
-    readTime: "7 menit",
-    image: sinergia.url,
-    excerpt: "Migrasi desa kota masih menjadi kekuatan utama pembentukan kota kota besar di Jawa Timur.",
-    content: [
-      "Surabaya bukan hanya kota, ia adalah magnet demografis Jawa Timur. Kawasan Gerbangkertasusila menampung mobilitas harian jutaan penduduk yang bergerak untuk bekerja dan bersekolah.",
-      "Urbanisasi menghadirkan peluang ekonomi, tetapi juga menuntut layanan publik yang adaptif. Transportasi, perumahan, dan pengelolaan sampah menjadi tiga isu paling terasa di lapangan.",
-      "UKM Kependudukan UNESA memandang urbanisasi sebagai ruang riset yang kaya. Studi lapangan di kampung kampung kota bisa menjadi laboratorium hidup.",
-    ],
-  },
-  {
-    id: "gender-pembangunan",
-    cat: "Gender",
-    title: "Perempuan, Pendidikan, dan Angka Fertilitas Indonesia",
-    date: "5 November 2025",
-    author: "Divisi Advokasi dan Pergerakan",
-    readTime: "6 menit",
-    image: familyGathering.url,
-    excerpt: "Semakin tinggi pendidikan perempuan, semakin terkendali angka kelahiran. Fakta klasik yang selalu relevan.",
-    content: [
-      "Berbagai riset kependudukan konsisten menunjukkan pola yang sama. Perempuan dengan tingkat pendidikan lebih tinggi cenderung menikah lebih matang dan memiliki jumlah anak yang lebih terencana.",
-      "Ini bukan soal menunda peran keluarga, melainkan soal kesiapan psikologis, finansial, dan sosial. Pendidikan memberi ruang bagi perempuan untuk membuat keputusan hidup dengan lebih sadar.",
-      "Karena itulah advokasi pendidikan perempuan adalah advokasi kependudukan.",
-    ],
-  },
-  {
-    id: "lansia-indonesia",
-    cat: "Lansia",
-    title: "Menyongsong Indonesia Menua",
-    date: "18 Desember 2025",
-    author: "Divisi Litbang",
-    readTime: "5 menit",
-    image: fungsionaris.url,
-    excerpt: "Setelah puncak bonus demografi, Indonesia akan memasuki era ageing population. Siap atau tidak.",
-    content: [
-      "Proyeksi BPS menyebut penduduk lansia Indonesia akan menembus 20 persen pada 2045. Ini adalah pergeseran struktural yang menuntut kesiapan lintas sektor.",
-      "Kesiapan itu meliputi sistem pensiun, layanan kesehatan geriatri, hingga desain kota yang ramah lansia. Ketiganya belum menjadi arus utama pembangunan hari ini.",
-      "Sebagai kader muda, mahasiswa memiliki kepentingan langsung. Karena kelak, kualitas ekosistem lansia yang kita rancang hari ini adalah kualitas kehidupan kita sendiri di masa depan.",
-    ],
-  },
-  {
-    id: "podcast-poka",
-    cat: "Kegiatan UKM",
-    title: "POKA: Podcast Kependudukan untuk Generasi Muda",
-    date: "8 Februari 2026",
-    author: "Divisi Kominfo",
-    readTime: "3 menit",
-    image: kominfo2.url,
-    excerpt: "Sebulan sekali, POKA hadir membawa perbincangan kependudukan yang ringan namun berdasar data.",
-    content: [
-      "POKA adalah singkatan Podcast Kependudukan, kanal audio bulanan yang dikelola Divisi Litbang bersama Kominfo. Fokusnya membumikan isu demografi untuk pendengar muda.",
-      "Setiap episode menghadirkan narasumber berbeda, mulai dari akademisi, aktivis komunitas, hingga alumni UKM yang telah bekerja di sektor publik.",
-      "Anda bisa menemukan POKA di kanal YouTube resmi UKM Kependudukan Unesa.",
-    ],
-  },
-  {
-    id: "capacity-building-2026",
-    cat: "Kegiatan UKM",
-    title: "Capacity Building 2026: Mengasah Potensi Membangun Kapasitas",
-    date: "27 April 2026",
-    author: "Divisi PPM",
-    readTime: "4 menit",
-    image: photobox.url,
-    excerpt: "Dua hari intensif pelatihan pengurus untuk memperkuat kolaborasi antar divisi dan kepemimpinan diri.",
-    content: [
-      "Capacity Building 2026 mengangkat tagline Mengasah Potensi, Membangun Kapasitas, dan Menciptakan Dampak Nyata. Rangkaian dua hari ini menjadi titik akselerasi kepengurusan.",
-      "Materi bergerak dari manajemen konflik, komunikasi produktif, hingga simulasi pengambilan keputusan berbasis data kependudukan.",
-      "Yang paling terasa dari Capacity Building bukan hanya ilmu, melainkan rasa memiliki.",
-    ],
-  },
-];
-
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-navy-deep">
@@ -479,7 +332,6 @@ function Home() {
         <Divisi />
         <ProgramKerja />
         <Galeri />
-        <Artikel />
         <MediaPartner />
         <Kontak />
       </main>
