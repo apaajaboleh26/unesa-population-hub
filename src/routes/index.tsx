@@ -648,9 +648,9 @@ function About() {
             </Reveal>
 
             <Reveal className="mt-14">
-              <div className="relative">
+              <div className="relative w-full max-w-full overflow-hidden">
                 <div className="absolute left-0 top-3 h-px w-full bg-border" />
-                <div className="flex gap-8 overflow-x-auto pb-4 lg:gap-14">
+                <div className="flex w-full max-w-full gap-8 overflow-x-auto pb-4 lg:gap-14">
                   {TIMELINE.map((t) => (
                     <div key={t.title} className="relative min-w-[220px] pt-8">
                       <div className="absolute left-0 top-1 h-4 w-4 rounded-full border-2 border-gold bg-background" />
