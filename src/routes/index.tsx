@@ -617,7 +617,7 @@ function About() {
     <section id="tentang" className="relative bg-bone py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
-          <Reveal className="lg:col-span-6">
+          <Reveal className="lg:col-span-6 min-w-0">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
                 <img src={fotoBersama} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -629,7 +629,7 @@ function About() {
             </div>
           </Reveal>
 
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 min-w-0">
             <SectionLabel n="/ 01">Tentang UKM</SectionLabel>
             <Reveal>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
