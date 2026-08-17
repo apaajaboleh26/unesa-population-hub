@@ -552,7 +552,17 @@ function Marquee() {
   );
 }
 
-function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  variant = "up",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  variant?: "up" | "left" | "right" | "zoom";
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
