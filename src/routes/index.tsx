@@ -693,7 +693,7 @@ function VisiMisi() {
         </Reveal>
         <div className="mt-20 grid gap-8 border-t border-white/15 pt-12 lg:grid-cols-2 lg:gap-12">
           {misi.map((m, i) => (
-            <Reveal key={i}>
+            <Reveal key={i} delay={i * 90} variant="up">
               <div className="flex gap-6">
                 <div className="font-mono text-xs text-gold">M/0{i + 1}</div>
                 <p className="flex-1 text-lg leading-relaxed text-white/85 lg:text-xl">{m}</p>
@@ -1074,8 +1074,8 @@ function ProgramKerja() {
         </Reveal>
 
         <div className="mt-12 space-y-3">
-          {filtered.map((p) => (
-            <Reveal key={p.id}>
+          {filtered.map((p, i) => (
+            <Reveal key={p.id} delay={(i % 3) * 80} variant="up">
               <article className="group grid gap-4 rounded-sm border border-border bg-background px-6 py-5 transition hover:border-navy-deep lg:grid-cols-12 lg:items-center lg:gap-6 lg:px-8">
                 <div className="lg:col-span-2">
                   <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">Divisi {p.divCode}</div>
@@ -1238,7 +1238,7 @@ function Galeri() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {GALERI.map((g, i) => (
-            <Reveal key={g.filename} className="h-full">
+            <Reveal key={g.filename} className="h-full" delay={(i % 4) * 80} variant="zoom">
               <button
                 type="button"
                 onClick={() => setOpenIdx(i)}
