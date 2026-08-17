@@ -1546,7 +1546,6 @@ function Footer() {
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/80 sm:flex-row sm:items-center">
           <div>© {new Date().getFullYear()} UKM Kependudukan UNESA. Seluruh hak cipta dilindungi.</div>
-          <div className="font-mono">Dibuat dengan hati di Surabaya.</div>
         </div>
       </div>
     </footer>
