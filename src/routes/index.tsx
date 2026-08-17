@@ -537,11 +537,11 @@ function Marquee() {
   const items = ["Advokasi", "Riset", "Kajian Demografi", "Bonus Demografi", "Keluarga Berencana", "Pengabdian", "Kolaborasi BKKBN", "The Great Population Event"];
   const doubled = [...items, ...items];
   return (
-    <section className="border-y border-border bg-navy-deep py-6 text-white" aria-hidden="true">
+    <section className="overflow-hidden border-y border-border bg-navy-deep py-5 text-white sm:py-6" aria-hidden="true">
       <div className="flex overflow-hidden">
-        <div className="flex shrink-0 animate-marquee gap-12 whitespace-nowrap pr-12 font-display text-4xl italic text-white/80 lg:text-6xl">
+        <div className="flex shrink-0 animate-marquee gap-8 whitespace-nowrap pr-8 font-display text-2xl italic text-white/80 sm:gap-12 sm:pr-12 sm:text-4xl lg:text-6xl">
           {doubled.map((s, i) => (
-            <span key={i} className="flex items-center gap-12">
+            <span key={i} className="flex items-center gap-8 sm:gap-12">
               {s}
               <span className="h-2 w-2 rounded-full bg-gold" />
             </span>
