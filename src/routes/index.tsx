@@ -333,7 +333,6 @@ const GALERI: GaleriItem[] = [
 ];
 
 ];
-
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-navy-deep">
