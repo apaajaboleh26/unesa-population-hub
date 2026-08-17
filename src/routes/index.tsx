@@ -14,7 +14,6 @@ import {
   Download,
   Filter,
   Clock,
-  Search,
   Users,
   Target,
   ListChecks,
@@ -46,7 +45,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, artikel, dan informasi media partner.",
+          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, dan informasi media partner.",
       },
       { property: "og:title", content: "UKM Kependudukan UNESA" },
       {
@@ -87,16 +86,6 @@ export const Route = createFileRoute("/")({
                 "https://tiktok.com/@ukmkependudukanunesaa",
               ],
             },
-            ...ARTIKEL.map((a) => ({
-              "@type": "Article",
-              headline: a.title,
-              description: a.excerpt,
-              image: `${SITE}${a.image}`,
-              datePublished: a.date,
-              author: { "@type": "Organization", name: a.author },
-              publisher: { "@id": `${SITE}/#organization` },
-              mainEntityOfPage: `${SITE}/#artikel`,
-            })),
             ...PROKER.map((p) => ({
               "@type": "Event",
               name: p.name,
@@ -127,7 +116,6 @@ const NAV = [
   { label: "Divisi", href: "#divisi" },
   { label: "Program Kerja", href: "#program" },
   { label: "Galeri", href: "#galeri" },
-  { label: "Artikel", href: "#artikel" },
   { label: "Media Partner", href: "#media-partner" },
   { label: "Kontak", href: "#kontak" },
 ];
@@ -332,141 +320,6 @@ const GALERI: GaleriItem[] = [
   { cat: "Kominfo Behind the Scene", src: kominfo2, filename: "kominfo-bts.jpg", date: "2025", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
 ];
 
-type Artikel = {
-  id: string;
-  cat: string;
-  title: string;
-  date: string;
-  author: string;
-  readTime: string;
-  excerpt: string;
-  image: string;
-  content: string[];
-};
-
-const ARTIKEL: Artikel[] = [
-  {
-    id: "bonus-demografi-2030",
-    cat: "Bonus Demografi",
-    title: "Membaca Ulang Bonus Demografi Indonesia 2030",
-    date: "12 Januari 2026",
-    author: "Divisi Litbang",
-    readTime: "6 menit",
-    image: fotoBersama,
-    excerpt: "Jendela peluang atau bom waktu? Sebuah tinjauan singkat bonus demografi dari perspektif pemuda hari ini.",
-    content: [
-      "Indonesia sedang berada di titik istimewa dalam sejarah demografinya. Rasio penduduk usia produktif diperkirakan mencapai puncaknya pada rentang 2020 hingga 2035, yang lazim disebut sebagai bonus demografi. Momen ini hanya terjadi satu kali dalam sejarah panjang suatu bangsa.",
-      "Namun bonus demografi bukan berkah otomatis. Ia hanya bekerja bila disertai investasi pendidikan, kesehatan, dan lapangan kerja yang memadai. Tanpa itu, kelebihan usia produktif justru menjadi tekanan sosial ekonomi baru.",
-      "Sebagai mahasiswa, kita berada persis di garis depan bonus demografi. Setiap keputusan pendidikan, kesehatan, dan karier kita hari ini adalah bagian dari cerita besar Indonesia 2045.",
-    ],
-  },
-  {
-    id: "catatan-gpe",
-    cat: "Kegiatan UKM",
-    title: "Catatan dari The Great Population Event",
-    date: "17 Juli 2025",
-    author: "Divisi Advokasi dan Pergerakan",
-    readTime: "5 menit",
-    image: studiBanding,
-    excerpt: "Rangkaian puncak tahunan yang mempertemukan akademisi, praktisi, dan mahasiswa dalam satu meja diskusi.",
-    content: [
-      "The Great Population Event adalah agenda tahunan terbesar UKM Kependudukan UNESA. Rangkaiannya menyatukan seminar nasional, lomba karya tulis, dan diskusi publik lintas kampus.",
-      "Tahun ini, tema besar yang diangkat adalah keluarga sebagai unit terkecil pembangunan. Pembahasan bergerak dari pengasuhan, kesehatan reproduksi, hingga tantangan generasi sandwich.",
-      "Yang menarik, sebagian besar peserta datang dari fakultas non sosial. Ini menjadi bukti bahwa isu kependudukan bersifat lintas disiplin dan menyentuh setiap ruang keilmuan.",
-    ],
-  },
-  {
-    id: "kb-digital",
-    cat: "Kependudukan",
-    title: "Keluarga Berencana di Era Digital",
-    date: "3 September 2025",
-    author: "Divisi Litbang",
-    readTime: "4 menit",
-    image: capacityBuilding,
-    excerpt: "Bagaimana teknologi mengubah cara kita memahami perencanaan keluarga dan kesehatan reproduksi.",
-    content: [
-      "Keluarga Berencana bukan lagi soal alat kontrasepsi semata. Ia telah bergeser menjadi ekosistem informasi yang menyentuh gaya hidup, keuangan keluarga, hingga kesehatan mental pasangan.",
-      "Aplikasi pelacak menstruasi, konsultasi daring, dan komunitas parenting daring adalah wajah baru Keluarga Berencana. Semuanya berjalan di ponsel yang setiap hari kita genggam.",
-      "Peran mahasiswa adalah memastikan literasi digital berjalan seimbang dengan literasi kesehatan reproduksi.",
-    ],
-  },
-  {
-    id: "urbanisasi-jatim",
-    cat: "Perkotaan",
-    title: "Urbanisasi Jawa Timur dan Wajah Surabaya Metropolitan",
-    date: "22 Oktober 2025",
-    author: "Divisi Litbang",
-    readTime: "7 menit",
-    image: sinergia,
-    excerpt: "Migrasi desa kota masih menjadi kekuatan utama pembentukan kota kota besar di Jawa Timur.",
-    content: [
-      "Surabaya bukan hanya kota, ia adalah magnet demografis Jawa Timur. Kawasan Gerbangkertasusila menampung mobilitas harian jutaan penduduk yang bergerak untuk bekerja dan bersekolah.",
-      "Urbanisasi menghadirkan peluang ekonomi, tetapi juga menuntut layanan publik yang adaptif. Transportasi, perumahan, dan pengelolaan sampah menjadi tiga isu paling terasa di lapangan.",
-      "UKM Kependudukan UNESA memandang urbanisasi sebagai ruang riset yang kaya. Studi lapangan di kampung kampung kota bisa menjadi laboratorium hidup.",
-    ],
-  },
-  {
-    id: "gender-pembangunan",
-    cat: "Gender",
-    title: "Perempuan, Pendidikan, dan Angka Fertilitas Indonesia",
-    date: "5 November 2025",
-    author: "Divisi Advokasi dan Pergerakan",
-    readTime: "6 menit",
-    image: familyGathering,
-    excerpt: "Semakin tinggi pendidikan perempuan, semakin terkendali angka kelahiran. Fakta klasik yang selalu relevan.",
-    content: [
-      "Berbagai riset kependudukan konsisten menunjukkan pola yang sama. Perempuan dengan tingkat pendidikan lebih tinggi cenderung menikah lebih matang dan memiliki jumlah anak yang lebih terencana.",
-      "Ini bukan soal menunda peran keluarga, melainkan soal kesiapan psikologis, finansial, dan sosial. Pendidikan memberi ruang bagi perempuan untuk membuat keputusan hidup dengan lebih sadar.",
-      "Karena itulah advokasi pendidikan perempuan adalah advokasi kependudukan.",
-    ],
-  },
-  {
-    id: "lansia-indonesia",
-    cat: "Lansia",
-    title: "Menyongsong Indonesia Menua",
-    date: "18 Desember 2025",
-    author: "Divisi Litbang",
-    readTime: "5 menit",
-    image: fungsionaris,
-    excerpt: "Setelah puncak bonus demografi, Indonesia akan memasuki era ageing population. Siap atau tidak.",
-    content: [
-      "Proyeksi BPS menyebut penduduk lansia Indonesia akan menembus 20 persen pada 2045. Ini adalah pergeseran struktural yang menuntut kesiapan lintas sektor.",
-      "Kesiapan itu meliputi sistem pensiun, layanan kesehatan geriatri, hingga desain kota yang ramah lansia. Ketiganya belum menjadi arus utama pembangunan hari ini.",
-      "Sebagai kader muda, mahasiswa memiliki kepentingan langsung. Karena kelak, kualitas ekosistem lansia yang kita rancang hari ini adalah kualitas kehidupan kita sendiri di masa depan.",
-    ],
-  },
-  {
-    id: "podcast-poka",
-    cat: "Kegiatan UKM",
-    title: "POKA: Podcast Kependudukan untuk Generasi Muda",
-    date: "8 Februari 2026",
-    author: "Divisi Kominfo",
-    readTime: "3 menit",
-    image: kominfo2,
-    excerpt: "Sebulan sekali, POKA hadir membawa perbincangan kependudukan yang ringan namun berdasar data.",
-    content: [
-      "POKA adalah singkatan Podcast Kependudukan, kanal audio bulanan yang dikelola Divisi Litbang bersama Kominfo. Fokusnya membumikan isu demografi untuk pendengar muda.",
-      "Setiap episode menghadirkan narasumber berbeda, mulai dari akademisi, aktivis komunitas, hingga alumni UKM yang telah bekerja di sektor publik.",
-      "Anda bisa menemukan POKA di kanal YouTube resmi UKM Kependudukan Unesa.",
-    ],
-  },
-  {
-    id: "capacity-building-2026",
-    cat: "Kegiatan UKM",
-    title: "Capacity Building 2026: Mengasah Potensi Membangun Kapasitas",
-    date: "27 April 2026",
-    author: "Divisi PPM",
-    readTime: "4 menit",
-    image: photobox,
-    excerpt: "Dua hari intensif pelatihan pengurus untuk memperkuat kolaborasi antar divisi dan kepemimpinan diri.",
-    content: [
-      "Capacity Building 2026 mengangkat tagline Mengasah Potensi, Membangun Kapasitas, dan Menciptakan Dampak Nyata. Rangkaian dua hari ini menjadi titik akselerasi kepengurusan.",
-      "Materi bergerak dari manajemen konflik, komunikasi produktif, hingga simulasi pengambilan keputusan berbasis data kependudukan.",
-      "Yang paling terasa dari Capacity Building bukan hanya ilmu, melainkan rasa memiliki.",
-    ],
-  },
-];
-
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-navy-deep">
@@ -479,7 +332,6 @@ function Home() {
         <Divisi />
         <ProgramKerja />
         <Galeri />
-        <Artikel />
         <MediaPartner />
         <Kontak />
       </main>
@@ -684,11 +536,11 @@ function Marquee() {
   const items = ["Advokasi", "Riset", "Kajian Demografi", "Bonus Demografi", "Keluarga Berencana", "Pengabdian", "Kolaborasi BKKBN", "The Great Population Event"];
   const doubled = [...items, ...items];
   return (
-    <section className="border-y border-border bg-navy-deep py-6 text-white" aria-hidden="true">
+    <section className="overflow-hidden border-y border-border bg-navy-deep py-5 text-white sm:py-6" aria-hidden="true">
       <div className="flex overflow-hidden">
-        <div className="flex shrink-0 animate-marquee gap-12 whitespace-nowrap pr-12 font-display text-4xl italic text-white/80 lg:text-6xl">
+        <div className="flex shrink-0 animate-marquee gap-8 whitespace-nowrap pr-8 font-display text-2xl italic text-white/80 sm:gap-12 sm:pr-12 sm:text-4xl lg:text-6xl">
           {doubled.map((s, i) => (
-            <span key={i} className="flex items-center gap-12">
+            <span key={i} className="flex items-center gap-8 sm:gap-12">
               {s}
               <span className="h-2 w-2 rounded-full bg-gold" />
             </span>
@@ -699,7 +551,17 @@ function Marquee() {
   );
 }
 
-function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  variant = "up",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  variant?: "up" | "left" | "right" | "zoom";
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
@@ -717,17 +579,28 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  const hidden =
+    variant === "left"
+      ? "-translate-x-6 opacity-0"
+      : variant === "right"
+        ? "translate-x-6 opacity-0"
+        : variant === "zoom"
+          ? "scale-[0.96] opacity-0"
+          : "translate-y-6 opacity-0";
   return (
     <div
       ref={ref}
-      style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
-      className={`transition-[opacity,transform] duration-[380ms] will-change-transform ${shown ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${className}`}
+      style={{
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        transitionDelay: shown ? `${delay}ms` : "0ms",
+      }}
+      className={`transition-[opacity,transform] duration-[520ms] will-change-transform motion-reduce:transition-none ${shown ? "translate-x-0 translate-y-0 scale-100 opacity-100" : hidden} ${className}`}
     >
       {children}
     </div>
   );
-
 }
+
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
@@ -741,10 +614,10 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
 
 function About() {
   return (
-    <section id="tentang" className="relative bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="tentang" className="relative bg-bone py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
-          <Reveal className="lg:col-span-6">
+          <Reveal className="lg:col-span-6 min-w-0">
             <div className="sticky top-32">
               <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
                 <img src={fotoBersama} alt="Foto bersama pengurus UKM Kependudukan UNESA" loading="lazy" decoding="async" className="h-full w-full object-cover" />
@@ -756,10 +629,10 @@ function About() {
             </div>
           </Reveal>
 
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 min-w-0">
             <SectionLabel n="/ 01">Tentang UKM</SectionLabel>
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Sebelas tahun merawat suara <span className="italic text-navy">kependudukan.</span>
               </h2>
             </Reveal>
@@ -775,9 +648,9 @@ function About() {
             </Reveal>
 
             <Reveal className="mt-14">
-              <div className="relative">
+              <div className="relative w-full max-w-full overflow-hidden">
                 <div className="absolute left-0 top-3 h-px w-full bg-border" />
-                <div className="flex gap-8 overflow-x-auto pb-4 lg:gap-14">
+                <div className="flex w-full max-w-full gap-8 overflow-x-auto pb-4 lg:gap-14">
                   {TIMELINE.map((t) => (
                     <div key={t.title} className="relative min-w-[220px] pt-8">
                       <div className="absolute left-0 top-1 h-4 w-4 rounded-full border-2 border-gold bg-background" />
@@ -808,7 +681,7 @@ function VisiMisi() {
   return (
     <section className="relative overflow-hidden bg-navy-deep py-24 text-white lg:py-32">
       <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <SectionLabel n="/ 02">
           <span className="text-white/85">Visi & Misi</span>
         </SectionLabel>
@@ -819,7 +692,7 @@ function VisiMisi() {
         </Reveal>
         <div className="mt-20 grid gap-8 border-t border-white/15 pt-12 lg:grid-cols-2 lg:gap-12">
           {misi.map((m, i) => (
-            <Reveal key={i}>
+            <Reveal key={i} delay={i * 90} variant="up">
               <div className="flex gap-6">
                 <div className="font-mono text-xs text-gold">M/0{i + 1}</div>
                 <p className="flex-1 text-lg leading-relaxed text-white/85 lg:text-xl">{m}</p>
@@ -838,13 +711,13 @@ function Divisi() {
   const [active, setActive] = useState<Divisi | null>(null);
 
   return (
-    <section id="divisi" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="divisi" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <SectionLabel n="/ 03">Lima Divisi</SectionLabel>
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Struktur yang bergerak sebagai <span className="italic">satu tubuh.</span>
               </h2>
             </Reveal>
@@ -862,6 +735,8 @@ function Divisi() {
           {DIVISI.map((d, i) => (
             <Reveal
               key={d.code}
+              delay={(i % 3) * 90}
+              variant="up"
               className={`h-full ${i < 3 ? "lg:col-span-2" : "lg:col-span-3"} ${i === DIVISI.length - 1 ? "md:col-span-2 lg:col-span-3" : ""}`}
             >
               <button
@@ -870,7 +745,7 @@ function Divisi() {
                 className="group relative block h-full w-full overflow-hidden rounded-xl text-left shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
                 aria-label={`Buka profil divisi ${d.name}`}
               >
-                <div className="relative h-full min-h-[380px] w-full overflow-hidden bg-muted">
+                <div className="relative h-full min-h-[260px] sm:min-h-[340px] lg:min-h-[380px] w-full overflow-hidden bg-muted">
                   <img
                     src={d.image}
                     alt={`Divisi ${d.name}`}
@@ -1139,13 +1014,13 @@ function ProgramKerja() {
   };
 
   return (
-    <section id="program" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="program" className="bg-bone py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <SectionLabel n="/ 04">Program Kerja</SectionLabel>
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Kalender kegiatan yang menyusun <span className="italic">satu periode.</span>
               </h2>
             </Reveal>
@@ -1200,8 +1075,8 @@ function ProgramKerja() {
         </Reveal>
 
         <div className="mt-12 space-y-3">
-          {filtered.map((p) => (
-            <Reveal key={p.id}>
+          {filtered.map((p, i) => (
+            <Reveal key={p.id} delay={(i % 3) * 80} variant="up">
               <article className="group grid gap-4 rounded-sm border border-border bg-background px-6 py-5 transition hover:border-navy-deep lg:grid-cols-12 lg:items-center lg:gap-6 lg:px-8">
                 <div className="lg:col-span-2">
                   <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">Divisi {p.divCode}</div>
@@ -1342,13 +1217,13 @@ function Galeri() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="galeri" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="galeri" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <SectionLabel n="/ 05">Galeri</SectionLabel>
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Momen yang <span className="italic">kami rekam</span> bersama.
               </h2>
             </Reveal>
@@ -1364,7 +1239,7 @@ function Galeri() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {GALERI.map((g, i) => (
-            <Reveal key={g.filename} className="h-full">
+            <Reveal key={g.filename} className="h-full" delay={(i % 4) * 80} variant="zoom">
               <button
                 type="button"
                 onClick={() => setOpenIdx(i)}
@@ -1453,231 +1328,6 @@ function FotoModal({ item, onClose }: { item: GaleriItem; onClose: () => void })
 }
 
 
-// ==================== Artikel (editorial) ====================
-
-function Artikel() {
-  const [open, setOpen] = useState<Artikel | null>(null);
-  const [query, setQuery] = useState("");
-  const [cat, setCat] = useState<string>("all");
-
-  const cats = useMemo(() => ["all", ...Array.from(new Set(ARTIKEL.map((a) => a.cat)))], []);
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return ARTIKEL.filter((a) => {
-      const catOk = cat === "all" || a.cat === cat;
-      if (!catOk) return false;
-      if (!q) return true;
-      return (
-        a.title.toLowerCase().includes(q) ||
-        a.excerpt.toLowerCase().includes(q) ||
-        a.author.toLowerCase().includes(q) ||
-        a.cat.toLowerCase().includes(q)
-      );
-    });
-  }, [query, cat]);
-
-  const [featured, ...rest] = filtered;
-  const secondary = rest.slice(0, 2);
-  const tail = rest.slice(2);
-
-  return (
-    <section id="artikel" className="bg-navy-deep py-24 text-white lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <SectionLabel n="/ 06">
-          <span className="text-white/85">Artikel</span>
-        </SectionLabel>
-        <Reveal>
-          <h2 className="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight lg:text-7xl">
-            Membaca kependudukan dari <span className="italic text-gold">kacamata mahasiswa.</span>
-          </h2>
-        </Reveal>
-
-        <Reveal>
-          <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <label className="relative flex w-full items-center lg:max-w-md">
-              <Search className="pointer-events-none absolute left-4 h-4 w-4 text-white/80" aria-hidden="true" />
-              <span className="sr-only">Cari artikel</span>
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Cari judul, kategori, atau penulis"
-                className="min-h-11 w-full rounded-full border border-white/20 bg-white/5 pl-11 pr-4 text-sm text-white placeholder:text-white/80 backdrop-blur-md focus:border-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-              />
-            </label>
-            <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter kategori artikel">
-              {cats.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setCat(c)}
-                  aria-pressed={cat === c}
-                  className={`min-h-9 rounded-full border px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                    cat === c ? "border-gold bg-gold text-navy-deep" : "border-white/20 text-white/80 hover:border-gold hover:text-white"
-                  }`}
-                >
-                  {c === "all" ? "Semua" : c}
-                </button>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        {filtered.length === 0 && (
-          <div className="mt-20 rounded-sm border border-dashed border-white/20 p-12 text-center text-sm text-white/85">
-            Tidak ada artikel yang cocok dengan pencarian Anda.
-          </div>
-        )}
-
-        {featured && (
-          <Reveal className="mt-20">
-            <button
-              type="button"
-              onClick={() => setOpen(featured)}
-              className="group grid w-full gap-8 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold lg:grid-cols-12 lg:gap-14"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-sm lg:col-span-8">
-                <img
-                  src={featured.image}
-                  alt={featured.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.04]"
-                />
-                <div className="absolute left-6 top-6 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
-                  Featured · {featured.cat}
-                </div>
-              </div>
-              <div className="lg:col-span-4 lg:pt-4">
-                <div className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/85">
-                  {featured.date} · {featured.readTime}
-                </div>
-                <h3 className="mt-4 font-display text-4xl leading-tight lg:text-5xl">
-                  <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
-                    {featured.title}
-                  </span>
-                </h3>
-                <p className="mt-6 text-base leading-relaxed text-white/75">{featured.excerpt}</p>
-                <div className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-gold">
-                  Baca selengkapnya
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </div>
-              </div>
-            </button>
-          </Reveal>
-        )}
-
-        {secondary.length > 0 && (
-          <div className="mt-20 grid gap-10 lg:grid-cols-2 lg:gap-14">
-            {secondary.map((a) => (
-              <ArtikelCard key={a.id} a={a} large onOpen={() => setOpen(a)} />
-            ))}
-          </div>
-        )}
-
-        {tail.length > 0 && (
-          <div className="mt-20 grid gap-10 border-t border-white/10 pt-16 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-            {tail.map((a) => (
-              <ArtikelCard key={a.id} a={a} onOpen={() => setOpen(a)} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {open && <ArtikelModal artikel={open} onClose={() => setOpen(null)} />}
-    </section>
-  );
-}
-
-function ArtikelCard({ a, large = false, onOpen }: { a: Artikel; large?: boolean; onOpen: () => void }) {
-  return (
-    <Reveal>
-      <button
-        type="button"
-        onClick={onOpen}
-        className="group flex h-full w-full flex-col text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-      >
-        <div className={`relative overflow-hidden rounded-sm ${large ? "aspect-[16/10]" : "aspect-[4/3]"}`}>
-          <img
-            src={a.image}
-            alt={a.title}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-[1.05]"
-          />
-          <div className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.25em] text-navy-deep">
-            {a.cat}
-          </div>
-        </div>
-        <div className={`mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-white/85`}>
-          {a.date} · {a.readTime}
-        </div>
-        <h3 className={`mt-3 font-display leading-tight text-white ${large ? "text-3xl lg:text-4xl" : "text-2xl lg:text-3xl"}`}>
-          <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
-            {a.title}
-          </span>
-        </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/85">{a.excerpt}</p>
-        <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
-          Baca selengkapnya
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-        </div>
-      </button>
-    </Reveal>
-  );
-}
-
-function ArtikelModal({ artikel, onClose }: { artikel: Artikel; onClose: () => void }) {
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onEsc);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onEsc);
-      document.body.style.overflow = "";
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy-deep/70 p-4 backdrop-blur-[3px] animate-modal-in"
-      onClick={onClose}
-    >
-      <div
-        className="relative max-h-[80vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-background text-navy-deep shadow-2xl animate-modal-panel sm:w-[75vw]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="relative aspect-[21/9] w-full overflow-hidden">
-          <img src={artikel.image} alt={artikel.title} loading="lazy" decoding="async" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 to-transparent" />
-          <button
-            onClick={onClose}
-            aria-label="Tutup"
-            className="absolute right-4 top-4 min-h-11 min-w-11 inline-flex items-center justify-center rounded-full bg-white/90 text-navy-deep transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
-        <div className="p-8 lg:p-14">
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">{artikel.cat}</div>
-          <h3 className="mt-3 font-display text-3xl leading-tight text-navy-deep lg:text-5xl">{artikel.title}</h3>
-          <div className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-            {artikel.date} · {artikel.author} · {artikel.readTime}
-          </div>
-          <div className="mt-8 space-y-5 border-t border-border pt-6 text-base leading-relaxed text-muted-foreground lg:text-lg">
-            {artikel.content.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ==================== Media Partner ====================
 
@@ -1690,8 +1340,8 @@ function MediaPartner() {
   ];
 
   return (
-    <section id="media-partner" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="media-partner" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
             <div className="flex h-full flex-col justify-between rounded-sm bg-bone p-8 lg:p-12">
@@ -1785,11 +1435,11 @@ function Kontak() {
   ];
 
   return (
-    <section id="kontak" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="kontak" className="bg-bone py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <SectionLabel n="/ 08">Kontak</SectionLabel>
         <Reveal>
-          <h2 className="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+          <h2 className="max-w-4xl font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
             Datang, sapa, atau <span className="italic">berkolaborasi.</span>
           </h2>
         </Reveal>
