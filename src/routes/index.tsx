@@ -736,6 +736,8 @@ function Divisi() {
           {DIVISI.map((d, i) => (
             <Reveal
               key={d.code}
+              delay={(i % 3) * 90}
+              variant="up"
               className={`h-full ${i < 3 ? "lg:col-span-2" : "lg:col-span-3"} ${i === DIVISI.length - 1 ? "md:col-span-2 lg:col-span-3" : ""}`}
             >
               <button
