@@ -332,7 +332,6 @@ const GALERI: GaleriItem[] = [
   { cat: "Kominfo Behind the Scene", src: kominfo2, filename: "kominfo-bts.jpg", date: "2025", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
 ];
 
-];
 function Home() {
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-accent selection:text-navy-deep">
