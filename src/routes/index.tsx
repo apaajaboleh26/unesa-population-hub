@@ -311,13 +311,12 @@ type GaleriItem = {
 
 const GALERI: GaleriItem[] = [
   { cat: "Foto Fungsionaris", src: fungsionaris, filename: "fungsionaris.jpg", date: "Periode 2026", desc: "Fungsionaris UKM Kependudukan UNESA periode aktif dalam sesi pemotretan resmi." },
-  { cat: "Foto Bersama UNESA", src: fotobersama2, filename: "foto-bersama-unesa.jpg", date: "Kampus Ketintang", desc: "Pengurus dan anggota UKM Kependudukan di depan tugu Universitas Negeri Surabaya." },
-  { cat: "Family Gathering", src: familyGathering, filename: "family-gathering.jpg", date: "2025", desc: "Momen kekeluargaan pengurus dan anggota di kafe outdoor Surabaya." },
+  { cat: "Family Gathering", src: familyGathering, filename: "family-gathering.jpg", date: "2026", desc: "Momen kekeluargaan pengurus dan anggota di kafe outdoor Surabaya." },
   { cat: "Capacity Building", src: capacityBuilding, filename: "capacity-building.jpg", date: "April 2026", desc: "Pelatihan dua hari untuk mengasah potensi dan kapasitas pengurus." },
   { cat: "Studi Banding", src: studiBanding, filename: "studi-banding.jpg", date: "Juni 2026", desc: "Kunjungan ke Universitas Airlangga sebagai bagian dari kolaborasi advokasi." },
-  { cat: "Sinergia UNIPMA x UNAIR x UNESA", src: sinergia, filename: "sinergia.jpg", date: "2025", desc: "Sinergi tiga organisasi kependudukan lintas kampus dalam satu ruang diskusi." },
-  { cat: "Photobox Bersama", src: photobox, filename: "photobox.jpg", date: "2025", desc: "Sesi photobox playful pengurus di sela agenda organisasi." },
-  { cat: "Kominfo Behind the Scene", src: kominfo2, filename: "kominfo-bts.jpg", date: "2025", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
+  { cat: "Sinergia UNIPMA x UNAIR x UNESA", src: sinergia, filename: "sinergia.jpg", date: "2026", desc: "Sinergi tiga organisasi kependudukan lintas kampus dalam satu ruang diskusi." },
+  { cat: "Photobox Bersama", src: photobox, filename: "photobox.jpg", date: "2026", desc: "Sesi photobox playful pengurus di sela agenda organisasi." },
+  { cat: "Kominfo Behind the Scene", src: kominfo2, filename: "kominfo-bts.jpg", date: "2026", desc: "Divisi Kominfo di balik layar dokumentasi organisasi." },
 ];
 
 function Home() {
