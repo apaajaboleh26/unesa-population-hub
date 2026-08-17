@@ -46,7 +46,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, artikel, dan informasi media partner.",
+          "Website resmi UKM Kependudukan Universitas Negeri Surabaya: profil organisasi, lima divisi, program kerja, galeri kegiatan, dan informasi media partner.",
       },
       { property: "og:title", content: "UKM Kependudukan UNESA" },
       {
@@ -87,16 +87,6 @@ export const Route = createFileRoute("/")({
                 "https://tiktok.com/@ukmkependudukanunesaa",
               ],
             },
-            ...ARTIKEL.map((a) => ({
-              "@type": "Article",
-              headline: a.title,
-              description: a.excerpt,
-              image: `${SITE}${a.image}`,
-              datePublished: a.date,
-              author: { "@type": "Organization", name: a.author },
-              publisher: { "@id": `${SITE}/#organization` },
-              mainEntityOfPage: `${SITE}/#artikel`,
-            })),
             ...PROKER.map((p) => ({
               "@type": "Event",
               name: p.name,
@@ -127,7 +117,6 @@ const NAV = [
   { label: "Divisi", href: "#divisi" },
   { label: "Program Kerja", href: "#program" },
   { label: "Galeri", href: "#galeri" },
-  { label: "Artikel", href: "#artikel" },
   { label: "Media Partner", href: "#media-partner" },
   { label: "Kontak", href: "#kontak" },
 ];
@@ -344,7 +333,6 @@ function Home() {
         <Divisi />
         <ProgramKerja />
         <Galeri />
-        <Artikel />
         <MediaPartner />
         <Kontak />
       </main>
@@ -606,8 +594,8 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
 
 function About() {
   return (
-    <section id="tentang" className="relative bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="tentang" className="relative bg-bone py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
           <Reveal className="lg:col-span-6">
             <div className="sticky top-32">
@@ -624,7 +612,7 @@ function About() {
           <div className="lg:col-span-6">
             <SectionLabel n="/ 01">Tentang UKM</SectionLabel>
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Sebelas tahun merawat suara <span className="italic text-navy">kependudukan.</span>
               </h2>
             </Reveal>
@@ -673,7 +661,7 @@ function VisiMisi() {
   return (
     <section className="relative overflow-hidden bg-navy-deep py-24 text-white lg:py-32">
       <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-gold/10 blur-3xl" />
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <SectionLabel n="/ 02">
           <span className="text-white/85">Visi & Misi</span>
         </SectionLabel>
@@ -703,13 +691,13 @@ function Divisi() {
   const [active, setActive] = useState<Divisi | null>(null);
 
   return (
-    <section id="divisi" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="divisi" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <SectionLabel n="/ 03">Lima Divisi</SectionLabel>
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Struktur yang bergerak sebagai <span className="italic">satu tubuh.</span>
               </h2>
             </Reveal>
@@ -735,7 +723,7 @@ function Divisi() {
                 className="group relative block h-full w-full overflow-hidden rounded-xl text-left shadow-sm transition-shadow duration-300 ease-in-out hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
                 aria-label={`Buka profil divisi ${d.name}`}
               >
-                <div className="relative h-full min-h-[380px] w-full overflow-hidden bg-muted">
+                <div className="relative h-full min-h-[260px] sm:min-h-[340px] lg:min-h-[380px] w-full overflow-hidden bg-muted">
                   <img
                     src={d.image}
                     alt={`Divisi ${d.name}`}
@@ -1004,13 +992,13 @@ function ProgramKerja() {
   };
 
   return (
-    <section id="program" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="program" className="bg-bone py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <SectionLabel n="/ 04">Program Kerja</SectionLabel>
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Kalender kegiatan yang menyusun <span className="italic">satu periode.</span>
               </h2>
             </Reveal>
@@ -1207,13 +1195,13 @@ function Galeri() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section id="galeri" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="galeri" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid items-end gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <SectionLabel n="/ 05">Galeri</SectionLabel>
             <Reveal>
-              <h2 className="font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
                 Momen yang <span className="italic">kami rekam</span> bersama.
               </h2>
             </Reveal>
@@ -1330,8 +1318,8 @@ function MediaPartner() {
   ];
 
   return (
-    <section id="media-partner" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="media-partner" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-14">
           <Reveal className="lg:col-span-5">
             <div className="flex h-full flex-col justify-between rounded-sm bg-bone p-8 lg:p-12">
@@ -1425,11 +1413,11 @@ function Kontak() {
   ];
 
   return (
-    <section id="kontak" className="bg-bone py-24 lg:py-32">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+    <section id="kontak" className="bg-bone py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         <SectionLabel n="/ 08">Kontak</SectionLabel>
         <Reveal>
-          <h2 className="max-w-4xl font-display text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
+          <h2 className="max-w-4xl font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-tight text-navy-deep lg:text-7xl">
             Datang, sapa, atau <span className="italic">berkolaborasi.</span>
           </h2>
         </Reveal>
