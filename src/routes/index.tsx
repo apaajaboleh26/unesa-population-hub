@@ -570,17 +570,28 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
     io.observe(el);
     return () => io.disconnect();
   }, []);
+  const hidden =
+    variant === "left"
+      ? "-translate-x-6 opacity-0"
+      : variant === "right"
+        ? "translate-x-6 opacity-0"
+        : variant === "zoom"
+          ? "scale-[0.96] opacity-0"
+          : "translate-y-6 opacity-0";
   return (
     <div
       ref={ref}
-      style={{ transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)" }}
-      className={`transition-[opacity,transform] duration-[380ms] will-change-transform ${shown ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${className}`}
+      style={{
+        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        transitionDelay: shown ? `${delay}ms` : "0ms",
+      }}
+      className={`transition-[opacity,transform] duration-[520ms] will-change-transform motion-reduce:transition-none ${shown ? "translate-x-0 translate-y-0 scale-100 opacity-100" : hidden} ${className}`}
     >
       {children}
     </div>
   );
-
 }
+
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
   return (
